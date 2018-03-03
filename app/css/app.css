@@ -1,0 +1,85 @@
+body{margin:0;background-color:#F9A603;}
+
+#master-container{position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url(http://img.almanacmedia.co.uk/dealchasrlogo.png);
+background-repeat:no-repeat;background-position:center center;background-size:contain;}
+
+#links-container{position:relative;top:5vh;left:0;width:30vw;}
+#links-container .main-link{width:200px;font-family:'Josefin Sans', sans-serif;
+    font-size:18px;color:#F9A603;cursor:pointer;padding:10px;background-color: #FFFFFF;z-index:99999;
+    margin:15px 0 0 0;}
+
+#action-container{display:none;position:absolute;top:0;left:50vw;width:80vw;height:100vh;background-color:#FFFFFF;overflow-x:scroll;
+margin:0 0 0 -40vw;}
+.close-action{position:fixed;top:10px;right:0;z-index:9999;font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;background-color:#FFF;
+    padding:20px;font-weight:bold;margin-top:-20px;cursor:pointer;border-radius:5px;}
+
+#action-container label{font-family: 'Josefin Sans', sans-serif;font-size: 12px;color: #000000;font-weight: bold;margin-top: 10px;}
+	
+#modal-cover{display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,0.8);z-index:99999;}
+.modal-message{position:relative;top:50px;left:50vw;width:76vw;padding:2vw;border-radius:5px;background-color:#FFF;
+    font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;
+margin:0 0 0 -40vw;}
+.close-modal, .close-modal-active, .close-modal-centered, .close-modal-done{background-color:#F9A603;border:none;color:#FFF;font-weight:bold;padding:5px;
+border-radius:5px;cursor: pointer;}
+
+.loading{position:relative;top:50%;left:50%;width:100px;height:100px;text-align:center;margin:-50px 0 0 -50px;
+    font-family:'Josefin Sans', sans-serif;font-size:25px;color:#F9A603;font-weight:bold;}
+
+#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:150px;font-family:'Josefin Sans', sans-serif;
+    font-size:25px;color:#FFF;font-weight:bold;text-align:center;padding:20px 0 0 0;text-shadow: 2px 2px #000000;overflow:hidden;
+background-size:cover;background-position:center center;}
+.logout-button{background-color:#FFF;border:none;color:#F9A603;padding:10px;border-radius:5px;cursor:pointer;font-weight:bold;}
+
+.part-title{width:100%;height:30px;font-family:'Josefin Sans', sans-serif;font-size:15px;color:#000000;font-weight:bold;
+text-align:center;line-height:30px;}
+
+.selected{background-color:#F9A603 !important;color:#FFF !important;}
+.spacer{position:relative;top:20px;left:5%;width:90%;height:200px;border-radius:5px;margin:20px 0 0 0;}
+
+.text-one{width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+font-weight:bold;}
+.text-one-center{width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+font-weight:bold;text-align:center;}
+.text-two{width:100%;height:100px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+font-weight:bold;}
+.text-two-center{width:100%;height:100px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+font-weight:bold;text-align:center;}
+
+.ui-timepicker-input {width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+font-weight:bold;text-align:center;}
+.ui-timepicker-am{font-family:'Josefin Sans', sans-serif;
+    font-size:20px;color:#000000;font-weight:bold;}
+.ui-timepicker-pm{font-family:'Josefin Sans', sans-serif;
+    font-size:20px;color:#000000;font-weight:bold;}
+
+.hasDatepicker{width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+font-weight:bold;text-align:center;}
+
+.control {font-family: 'Josefin Sans', sans-serif;display: block;position: relative;padding-left: 30px;margin-bottom: 5px;padding-top: 3px;cursor: pointer;
+font-size: 20px;}
+    .control input {position: absolute;z-index: -1;opacity: 0;}
+.control_indicator {position: absolute;top: 2px;left: 0;height: 20px;width: 20px;background: #FFF;border: 1px solid #F9A603;}
+.control-radio .control_indicator {border-radius: 0;}
+
+.control:hover input ~ .control_indicator,
+.control input:focus ~ .control_indicator {background: #F9A603;}
+
+.control input:checked ~ .control_indicator {background: #F9A603;}
+.control:hover input:not([disabled]):checked ~ .control_indicator,
+.control input:checked:focus ~ .control_indicator {background: #0E6647;}
+.control input:disabled ~ .control_indicator {background: #e6e6e6;opacity: 0.6;pointer-events: none;}
+.control_indicator:after {box-sizing: unset;content: '';position: absolute;display: none;}
+.control input:checked ~ .control_indicator:after {display: block;}
+.control-checkbox .control_indicator:after {left: 8px;top: 4px;width: 3px;height: 8px;border: solid #ffffff;border-width: 0 2px 2px 0;transform: rotate(45deg);}
+.control-checkbox input:disabled ~ .control_indicator:after {border-color: #7b7b7b;}
+
+@media (max-width: 800px){
+	#action-container{display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:#FFFFFF;overflow-x:scroll;
+	margin:0;}
+
+	#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:30vh;font-family:'Josefin Sans', sans-serif;
+		font-size:25px;color:#FFF;font-weight:bold;text-align:center;padding:20px 0 0 0;text-shadow: 2px 2px #000000;overflow:hidden;
+	background-size:cover;background-position:center center;}
+}
+
+

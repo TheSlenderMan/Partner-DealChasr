@@ -1,0 +1,28 @@
+#new-voucher{position:relative;top:0;left:0;width:100%;height:100%;}
+.new-voucher-title{position:relative;top:0;left:0;width:100%;padding:20px 0 20px 0;background-size:cover;background-repeat:no-repeat;
+text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;color:#FFFFFF;text-shadow: 2px 2px #000000;}
+
+#deal-types{position:relative;top:5px;left:0;width:100%;height:40px;padding:0 0 0 1px;}
+#deal-types .deal-type{display:inline-block;width:calc(100% / 3.5);text-align:center;
+font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
+cursor:pointer;margin: 0 0 0 3.5%;background-color:#FFF;border-bottom:1px solid #F9A603;border-left:1px solid #F9A603;
+border-right:1px solid #F9A603;}
+
+#voucher-types{width:100%;padding:0 0 0 1px;margin:40px 0 0 0;z-index:9999;}
+#voucher-types .voucher-type{width:90%;text-align:center;font-family:'Josefin Sans', sans-serif;
+font-size:18px;color:#F9A603;font-weight:bold;height:45px;line-height:45px;cursor:pointer;margin:20px 0 0 4.5%;
+background-color:#FFF;border-bottom:1px solid #F9A603;border-left:1px solid #F9A603;
+border-right:1px solid #F9A603;}
+	
+
+#voucher-details{position:relative;top:10px;left:50%;width:80%;height:40px;padding:0 0 0 1px;margin:40px 0 0 -40%;z-index:9;text-align:center;}
+
+#voucher-flow{position:fixed; bottom:0;left:0;width:100%;height:40px;line-height:40px;font-family:'Josefin Sans', sans-serif;
+    font-size:18px;color:#FFFFFF;font-weight:bold;text-align:center;background-color:#F9A603;z-index:9999;}
+
+.voucher-submit-button{height:100%;background-color:#FFF;border:none;color:#F9A603;margin:0 0 0 20px;cursor:pointer;}
+
+
+@media (max-width: 800px){
+	#voucher-types .voucher-type{margin:10px 0 0 4.5%;}
+}
