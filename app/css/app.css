@@ -25,7 +25,7 @@ border-radius:5px;cursor: pointer;}
 .loading{position:relative;top:50%;left:50%;width:100px;height:100px;text-align:center;margin:-50px 0 0 -50px;
     font-family:'Josefin Sans', sans-serif;font-size:25px;color:#F9A603;font-weight:bold;}
 
-#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:150px;font-family:'Josefin Sans', sans-serif;
+#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:200px;font-family:'Josefin Sans', sans-serif;
     font-size:25px;color:#FFF;font-weight:bold;text-align:center;padding:20px 0 0 0;text-shadow: 2px 2px #000000;overflow:hidden;
 background-size:cover;background-position:center center;}
 .logout-button{background-color:#FFF;border:none;color:#F9A603;padding:10px;border-radius:5px;cursor:pointer;font-weight:bold;}
@@ -77,7 +77,7 @@ font-size: 20px;}
 	#action-container{display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:#FFFFFF;overflow-x:scroll;
 	margin:0;}
 
-	#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:30vh;font-family:'Josefin Sans', sans-serif;
+	#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:35vh;font-family:'Josefin Sans', sans-serif;
 		font-size:25px;color:#FFF;font-weight:bold;text-align:center;padding:20px 0 0 0;text-shadow: 2px 2px #000000;overflow:hidden;
 	background-size:cover;background-position:center center;}
 }

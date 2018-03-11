@@ -18,6 +18,7 @@ if(isset($_SESSION['userID'])){
         <link rel="stylesheet" href="http://my.dealchasr.co.uk/app/css/detailsView.css" />
         <link rel="stylesheet" href="http://my.dealchasr.co.uk/app/css/dealsView.css" />
         <link rel="stylesheet" href="http://my.dealchasr.co.uk/app/css/stats.css" />
+		<link rel="stylesheet" href="http://my.dealchasr.co.uk/app/css/invoices.css" />
         <link rel="stylesheet" href="http://my.dealchasr.co.uk/app/js/jquery.timepicker.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
         <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css"    />
@@ -52,7 +53,7 @@ if(isset($_SESSION['userID'])){
                 <div class="main-link" id="add_voucher" >ADD VOUCHER</div>
                 <div class="main-link" id="add_deal" >ADD DEAL/EVENT</div>
                 <div class="main-link" id="active_deal" >ACTIVE DEALS &amp; VOUCHERS</div>
-                <div class="main-link" id="stats" >STATISTICS</div>
+                <div class="main-link" id="stats" >STATISTICS/INVOICES</div>
                 <div class="main-link" id="venue_details" >VENUE DETAILS</div>
             </div>
             <div id="venue-message" >

@@ -6,6 +6,22 @@ $(document).ready(function(){
     $(document).on("click", ".venue-details-submit-button", function(){
        submitDetails();
     });
+	
+	$(document).on("click", ".venue-details-status-button", function(){
+		var state = $(this).attr("data");
+		if(state == 1){
+			s = "DEACTIVATE";
+			if(confirm("ARE YOU SURE YOU WANT TO DEACTIVATE YOUR ACCOUNT?\n\nYou will not be able to create any vouchers and deals or edit your details.\n\nIf you wish to reactivate please contact us at theteam@dealchasr.co.uk")){
+				changeAccountStatus(s, window.venueID);
+			}
+		} else {
+			s = "ACTIVATE";
+			if(confirm("ARE YOU SURE YOU WANT TO ACTIVATE YOUR ACCOUNT?\n\nYour billing will continue as it was before.")){
+				changeAccountStatus(s, window.venueID);
+			}
+		}
+        
+    });
 
     $(document).on("change", "#inputfile",function(){
         var modal = $("#modal-cover");
@@ -76,6 +92,11 @@ function getDetailsView(){
         "<label>CONTACT NUMBER</label><br />" +
         "<input type='text' class='text-one-center' name='venue-contact' id='venueContact' value='" + window.venueContact + "' />" +
         "</div>";
+		
+	details += "<br /><br /><div class='venue-email' >" +
+        "<label>CONTACT EMAIL</label><br />" +
+        "<input type='text' class='text-one-center' name='venue-email' id='venueEmail' value='" + window.venueEmail + "' />" +
+        "</div>";
 
     details += "<br /><br /><div class='venue-address' >" +
         "<label>ADDRESS ONE</label><br />" +
@@ -95,11 +116,51 @@ function getDetailsView(){
     details += "<br /><br /><div class='venue-details-submit' >" +
         "<button type='text' class='venue-details-submit-button' id='venue-submit' >SUBMIT CHANGES</button>" +
         "</div>";
+		
+		var statusStr = "";
+		if(window.accountActive == 1){
+			statusStr = "DEACTIVATE ACCOUNT";
+		} else {
+			statusStr = "ACTIVATE ACCOUNT";
+		}
+		
+	details += "<br /><br /><div class='venue-details-status' >" +
+        "<button type='text' class='venue-details-status-button' id='venue-status' data=" + window.accountActive + " >" + statusStr + "</button>" +
+        "</div>";
 
     details += "<div class='spacer' ></div>" +
         "</div>";
 
     actionView.html(details);
+}
+
+function changeAccountStatus(state, id){
+	var modal = $("#modal-cover");
+    var modalText = $(".modal-message");
+    modalText.html("CLOSING ACCOUNT...<br /><br />");
+    modal.show();
+	$.ajax({
+		url: "http://api.almanacmedia.co.uk/venues/status",
+		type: "POST",
+		dataType: "JSON",
+		headers: {
+			"Authorization": "DS1k1Il68_uPPoD"
+		},
+		data: {
+			"state": state,
+			"id": id
+		},
+		success: function(json){
+			if(json.changed == 1){
+				window.location.href = "logout.php";
+			} else {
+				console.log(e);
+			}
+		},
+		error: function(e){
+			console.log(e);
+		}
+	});
 }
 
 function submitDetails(){
@@ -112,6 +173,7 @@ function submitDetails(){
     var venueWebsite     = $("#venueWebsite").val();
     var venueOpenHours   = $("#venueOpen").val();
     var venueContact     = $("#venueContact").val();
+	var venueEmail     = $("#venueEmail").val();
     var venueAddressOne  = $("#venueAddressOne").val();
     var venueAddressTwo  = $("#venueAddressTwo").val();
     var venueAddressCity = $("#venueAddressCity").val();
@@ -130,6 +192,9 @@ function submitDetails(){
             "<input type='button' class='close-modal-centered' value='CLOSE' />");
     } else if(venueContact == ""){
         modalText.html("YOU MUST ENTER A CONTACT NUMBER<br /><br />" +
+            "<input type='button' class='close-modal-centered' value='CLOSE' />");
+    } else if(venueEmail == ""){
+        modalText.html("YOU MUST ENTER AN EMAIL ADDRESS<br /><br />" +
             "<input type='button' class='close-modal-centered' value='CLOSE' />");
     } else if(venueAddressOne == ""){
         modalText.html("YOU MUST ENTER THE FIRST LINE OF YOUR ADDRESS<br /><br />" +
@@ -156,6 +221,7 @@ function submitDetails(){
                 "vWebsite": venueWebsite,
                 "vOpenHours": venueOpenHours,
                 "vContact": venueContact,
+				"vEmail": venueEmail,
                 "vAddressOne": venueAddressOne,
                 "vAddressTwo": venueAddressTwo,
                 "vAddressCity": venueAddressCity,
