@@ -12,7 +12,7 @@ font-family: 'Josefin Sans', sans-serif;font-size: 3vw;font-weight: bold;color: 
 
 .chart-title{font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
 
-.stats-chart{font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
+#stats-chart{font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
 
 #invoices-container{position:relative;width:80%;top:0;left:50%;margin:0 0 0 -40%;}
 #invoice{width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;font-weight:bold;}

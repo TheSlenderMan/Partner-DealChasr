@@ -15,7 +15,8 @@ margin:0 0 0 -40vw;}
 
 #action-container label{font-family: 'Josefin Sans', sans-serif;font-size: 12px;color: #000000;font-weight: bold;margin-top: 10px;}
 	
-#modal-cover{display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,0.8);z-index:99999;}
+#modal-cover{display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,0.8);z-index:99999;
+overflow-y:auto;overflow-x:hidden;}
 .modal-message{position:relative;top:50px;left:50vw;width:76vw;padding:2vw;border-radius:5px;background-color:#FFF;
     font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;
 margin:0 0 0 -40vw;}

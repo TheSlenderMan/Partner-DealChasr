@@ -8,6 +8,25 @@ background-size:contain;background-position:center center;background-repeat:no-r
 .tier-container{position:relative;width:100%;height:200px;font-family:'Josefin Sans', sans-serif;font-size:500%;color:#F9A603;
 font-weight:bold;opacity:0.2;text-align:left;}
 
+.invoice-items{position:relative;width:100%;border:1px solid #000;}
+.invoice-item{font-family:'Josefin Sans', sans-serif;font-size:65%;color:#F9A603;
+font-weight:bold;text-align:left;padding:15px;}
+.invoice-item-name{float:left;width:40%;border-right:1px solid #000;border-bottom:1px solid #000;text-align:left;}
+.invoice-item-amount{float:right;width:40%;text-align:right;}
+.invoice-total{border:1px solid #000;font-family:'Josefin Sans', sans-serif;font-size:100%;color:#F9A603;
+font-weight:bold;text-align:left;padding:15px;text-align:right;}
+.invoice-nothing{font-family:'Josefin Sans', sans-serif;font-size:200%;color:#F9A603;
+font-weight:bold;padding:15px;text-align:center;}
+
 .black-label{font-family:'Josefin Sans', sans-serif;font-size:14px;color:#000;font-weight:bold;}
 .large-header{font-family:'Josefin Sans', sans-serif;font-size:34px;color:#F9A603;font-weight:bold;}
 .small-header{font-family:'Josefin Sans', sans-serif;font-size:14px;color:#F9A603;font-weight:bold;}
+
+.close-modal-invoice{display:inline-block;width:100%;text-align:center;
+font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
+cursor:pointer;background-color:#FFF;border-bottom:1px solid #F9A603;border-left:1px solid #F9A603;
+border-right:1px solid #F9A603;}
+
+@media(max-width: 600px){
+	.tier-container{font-size:330%;}
+}

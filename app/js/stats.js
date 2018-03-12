@@ -3,6 +3,14 @@ $(document).ready(function(){
 		var id = $(this).attr('id');
 		getInvoice(id);
 	});
+	
+	$(document).on("click", ".close-modal-invoice", function(){
+		var modal = $("#modal-cover");
+		var modalText = $(".modal-message");
+		
+		modalText.html("");
+		modal.hide();
+	});
 });
 
 function getInvoice(id){
@@ -44,16 +52,41 @@ function getInvoice(id){
 				var vpostcode = j.vPostCode;
 				var venueID = j.venueID;
 				var invoiceID = j.id;
+				var payments = j.payments;
 				var tierString = "";
+				var subAmount = 0.00;
 			
 				if(vtier == 1){
 					tierString = "FREE ACCOUNT";
+					subAmount  = 0.00;
 				} else if(vtier == 2) {
 					tierString = "PRO ACCOUNT";
+					subAmount  = 0.00;
 				} else {
 					tierString = "PREMIUM ACCOUNT";
+					subAmount = 9.99;
 				}
-			
+				
+				var paymentsTotal = 0;
+				var paymentItems = "";
+				
+				if(payments.length > 0){
+					$.each(payments, function(i, o){
+						var thisAmount = o.grossPaid;
+						paymentItems += "<br /><br /><br />" +
+						   "<div class='invoice-item-name' >" +
+						   "" + "Payment (Thank You)" + 
+						   "</div>" + 
+						   "<div class='invoice-item-amount' >" + 
+						   "&pound;" + thisAmount + " - " +
+						   "</div>";
+						   
+						   paymentsTotal = parseFloat(paymentsTotal) + parseFloat(o.grossPaid);
+					});
+				}
+				console.log(paymentsTotal);
+				var total = Math.round(((iamount + subAmount) - paymentsTotal) * 1e12) / 1e12;
+				
 				invoice += "<div id='invoice-container' >";
 				invoice += "<div class='invoice-dealchasr-logo' >&nbsp;</div>";
 				invoice += "<div class='invoice-customer-details' >";
@@ -69,6 +102,47 @@ function getInvoice(id){
 				invoice += "</div>";
 				invoice += "<div style='clear:both;' ></div>";
 				invoice += "<div class='tier-container' >" + tierString + "</div>";
+				invoice += "<div class='invoice-items' >";
+				invoice += "<div class='invoice-item' >" + 
+						   "<div class='invoice-item-name' >" +
+						   "" + "Monthly Redemptions" + 
+						   "</div>" + 
+						   "<div class='invoice-item-amount' >" + 
+						   "&pound;" + iamount +
+						   "</div><br /><br /><br />" +
+						   "<div class='invoice-item-name' >" +
+						   "" + "Subscription (Premium only)" + 
+						   "</div>" + 
+						   "<div class='invoice-item-amount' >" + 
+						   "&pound;" + subAmount +
+						   "</div>" + 
+						   paymentItems + 
+						   "<br /><br />" +
+						   "</div>";
+				invoice += "<div class='invoice-total' >TOTAL &pound;" + total.toFixed(2) +
+				"</div>";
+				invoice += "<div style='clear:both;' ></div>";
+				invoice += "</div>";
+				if(total == 0 || total == 0.00 || iinvoicePaid == 1 || icancelled == 1){
+					invoice += "<div class='invoice-nothing' >NOTHING TO PAY<br /><br />" + 
+					"<input type='button' class='close-modal-invoice' value='CLOSE' /><br /><br /></div>";
+				} else {
+					invoice +=  "<br /><br /><br /><form action='https://www.paypal.com/cgi-bin/webscr' method='post'>" +
+								"<input type='hidden' name='cmd' value='_xclick'>" +
+								"<input type='hidden' name='business' value='theteam@dealchasr.co.uk'>" +
+								"<input type='hidden' name='item_name' value='DealChasr Invoice'>" +
+								"<input type='hidden' name='item_number' value='DS-" + invoiceID + "'>" +
+								"<input type='hidden' name='amount' value='" + total + "'>" +
+								"<input type='hidden' name='currency_code' value='GBP'>" +
+								"<input type='hidden' name='notify_url' value='http://my.dealchasr.co.uk/app/ipn/ipn.php'>" +
+								"<input type='hidden' name='return' value='http://my.dealchasr.co.uk/thankyou/?'>" +
+								"<input type='hidden' name='cancel' value='http://my.dealchasr.co.uk/'>" +
+								"<input type='image' name='submit' border='0'" +
+								"src='https://www.paypalobjects.com/en_GB/i/btn/btn_paynowCC_LG.gif'" +
+								"alt='PayPal - The safer, easier way to pay online'>" +
+								"</form><br /><br />" +
+								"<input type='button' class='close-modal-invoice' value='CLOSE' /><br /><br />";
+				}
 				invoice += "</div><br /><br /><br /><br />";
 			
 				modalText.html(invoice);
