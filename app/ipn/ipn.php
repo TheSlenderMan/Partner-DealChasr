@@ -29,16 +29,28 @@ if ($verified) {
 	$getInvoice->execute();
 	$invoice = $getInvoice->fetch();
 	
+	$getVenue = $conn->prepare("SELECT active, suspension FROM ds_venues WHERE id = :vid");
+	$getVenue->bindParam(":vid", $invoice['venueID']);
+	$getVenue->execute();
+	$venue = $getVenue->fetch();
+	
 	//Get any payments on the invoice
 	$getPayment = $conn->prepare("SELECT * FROM ds_payments WHERE invoiceID = :iid");
 	$getPayment->bindParam(":iid", $invoice_number);
 	$getPayment->execute();
 	$payment = $getPayment->fetchAll();
 	
-	if($invoice['amount'] == $gross_paid){
+	$total = ($invoice['amount'] + $invoice['subscription']);
+	
+	if($total == $gross_paid){
 		$pay = $conn->prepare("UPDATE ds_invoices SET invoicePaid = 1 WHERE id = :iid");
 		$pay->bindParam(":iid", $invoice_number);
-		$pay->execute();	
+		$pay->execute();
+		if($venue['active'] == 0 && $venue['suspension'] == "OVERDUE"){
+			$re = $conn->prepare("UPDATE ds_venues SET active = 1 AND suspension = '' AND id = :vid");
+			$re->bindParam(":vid", $invoice['venueID']);
+			$re->execute();
+		}
 		$status = 1;
 	} else {
 		$status = -1;
@@ -59,7 +71,7 @@ if ($verified) {
 			$pTotal = ($pTotal + $pv['grossPaid']);
 		}
 		$totalPaid = ($gross_paid + $pTotal);
-		if($totalPaid == $invoice['amount']){
+		if($totalPaid == $total){
 			$addPay = $conn->prepare("UPDATE ds_invoices SET invoicePaid = 1 WHERE id = :iid");
 			$addPay->bindParam(":iid", $invoice_number);
 			$addPay->execute();
@@ -72,6 +84,12 @@ if ($verified) {
 			$addPay->bindParam(":gpd", $gross_paid);
 			$addPay->bindParam(":pyd", $payment_date);
 			$addPay->execute();
+			
+			if($venue['active'] == 0 && $venue['suspension'] == "OVERDUE"){
+				$re = $conn->prepare("UPDATE ds_venues SET active = 1 AND suspension = '' AND id = :vid");
+				$re->bindParam(":vid", $invoice['venueID']);
+				$re->execute();
+			}
 			
 			$status = 1;
 		} else {

@@ -85,7 +85,7 @@ function getInvoice(id){
 					});
 				}
 				console.log(paymentsTotal);
-				var total = Math.round(((iamount + subAmount) - paymentsTotal) * 1e12) / 1e12;
+				var total = (parseFloat(iamount) + parseFloat(subAmount)) - paymentsTotal;
 				
 				invoice += "<div id='invoice-container' >";
 				invoice += "<div class='invoice-dealchasr-logo' >&nbsp;</div>";
@@ -127,7 +127,7 @@ function getInvoice(id){
 					invoice += "<div class='invoice-nothing' >NOTHING TO PAY<br /><br />" + 
 					"<input type='button' class='close-modal-invoice' value='CLOSE' /><br /><br /></div>";
 				} else {
-					invoice +=  "<br /><br /><br /><form action='https://www.paypal.com/cgi-bin/webscr' method='post'>" +
+					invoice +=  "<br /><br /><br /><form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post'>" +
 								"<input type='hidden' name='cmd' value='_xclick'>" +
 								"<input type='hidden' name='business' value='theteam@dealchasr.co.uk'>" +
 								"<input type='hidden' name='item_name' value='DealChasr Invoice'>" +
@@ -206,9 +206,11 @@ function getStatsView(){
 					var date = v.invoiceDate.split(" ");
 					var justDate = date[0];
 					
+					var total = parseFloat(v.amount) + parseFloat(v.subscription);
+					
 					statsView += "<div id='invoice' >" + 
 					"<div class='invoice-date' >" + justDate + "</div>" + 
-					"<div class='invoice-amount' >£" + v.amount + "</div>" + 
+					"<div class='invoice-amount' >£" + total + "</div>" + 
 					"<div class='invoice-status' >" + paid + "</div>" + 
 					"<div class='invoice-view' id='" + v.id + "' >VIEW/PAY</div>" + 
 					"</div><br /><br />";

@@ -11,6 +11,7 @@ if(isset($_SESSION['userID'])){
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="stylesheet" href="http://my.dealchasr.co.uk/css/login.css" />
+		<link rel="stylesheet" type="text/css" href="http://my.dealchasr.co.uk/css/ath.css">
 
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -22,6 +23,16 @@ if(isset($_SESSION['userID'])){
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" ></script>
         <script src="http://my.dealchasr.co.uk/js/login.js" type="text/javascript" ></script>
+		<script src="http://my.dealchasr.co.uk/js/ath.js"></script>
+		
+		<script>
+            $(document).ready(function(){
+			   addToHomescreen({
+				   skipFirstVisit: true,
+				   maxDisplayCount: 3
+			   });
+            });
+        </script>
 
     </head>
     <body>
@@ -35,8 +46,8 @@ if(isset($_SESSION['userID'])){
                 <input class="text-input" type="password" name="password" id="password" value="PASSWORD" /><br /><br /><br />
                 <input class="login-button" type="button" name="login" id="login" value="LOGIN" /><br /><br /><br />
 				<span class="not-a-partner-text" >
-					NOT A DEALSPOTR PARTNER?<br /><a href="http://dealchasr.co.uk/becomeapartner" >
-						CLICK TO FIND OUT HOW TO BECOME A PARTNER.
+					NOT A DEALSPOTR PARTNER?<br /><a href="http://my.dealchasr.co.uk/venuesignup" >
+						CLICK HERE TO BECOME A PARTNER.
 					</a>
 				</span>
 				<br /><br />

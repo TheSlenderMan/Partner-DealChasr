@@ -22,10 +22,12 @@ if(isset($_SESSION['userID'])){
         <link rel="stylesheet" href="http://my.dealchasr.co.uk/app/js/jquery.timepicker.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
         <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css"    />
-
+		<link rel="stylesheet" type="text/css" href="http://my.dealchasr.co.uk/css/ath.css">
+		
         <script>
             window.uid = <? echo $uid; ?>;
         </script>
+		<script src="http://my.dealchasr.co.uk/js/ath.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" ></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
@@ -41,6 +43,10 @@ if(isset($_SESSION['userID'])){
                $(document).on("click", ".close-modal-centered", function(){
                    closeModalCentered();
                });
+			   addToHomescreen({
+				   skipFirstVisit: true,
+				   maxDisplayCount: 3
+			   });
             });
             function closeModalCentered(){
                 $("#modal-cover").hide();

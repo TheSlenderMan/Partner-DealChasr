@@ -10,7 +10,8 @@ font-family: 'Josefin Sans', sans-serif;font-size: 3vw;font-weight: bold;color: 
 
 .d-count-text{position: relative;font-size: 17vw;top: 20px;}
 
-.chart-title{font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
+.chart-title{font-family:'Josefin Sans', sans-serif;font-size:28px;color:#FFF;font-weight:bold;text-align:center;
+width:100%;background-color:#F9A603;padding:10px 0 10px 0;}
 
 #stats-chart{font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
 
