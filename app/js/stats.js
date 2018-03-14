@@ -55,6 +55,7 @@ function getInvoice(id){
 				var payments = j.payments;
 				var tierString = "";
 				var subAmount = 0.00;
+				var promo = j.promo;
 			
 				if(vtier == 1){
 					tierString = "FREE ACCOUNT";
@@ -84,8 +85,20 @@ function getInvoice(id){
 						   paymentsTotal = parseFloat(paymentsTotal) + parseFloat(o.grossPaid);
 					});
 				}
-				console.log(paymentsTotal);
-				var total = (parseFloat(iamount) + parseFloat(subAmount)) - paymentsTotal;
+
+				if(promo == '1'){
+					var total = 0.00;
+					var t = (parseFloat(iamount) + parseFloat(subAmount)) - paymentsTotal;
+					paymentItems += "<br /><br /><br />" +
+						"<div class='invoice-item-name' >" +
+						"" + "Introduction Promo" +
+						"</div>" +
+						"<div class='invoice-item-amount' >" +
+						"&pound;" + t + " - " +
+						"</div>";
+				} else {
+					var total = (parseFloat(iamount) + parseFloat(subAmount)) - paymentsTotal;
+				}
 				
 				invoice += "<div id='invoice-container' >";
 				invoice += "<div class='invoice-dealchasr-logo' >&nbsp;</div>";

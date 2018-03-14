@@ -1,0 +1,42 @@
+body{margin:0;background-color:#F9A603;}
+
+#master-container{position:absolute;top:0;left:0;width:100vw;}
+
+#header-container{position:relative;top:0;left:0;width:100%;height:300px;
+    background-image:url(http://img.almanacmedia.co.uk/web-group.jpg);background-size:cover;background-position:center center;
+background-repeat:no-repeat;text-align:center;background-color:rgba(0,0,0,0.5);}
+#header-container h1{font-family:'Amiko', sans-serif;font-size:700%;font-weight:bold;color:#F9A603;margin:0;text-shadow: 0px 3px 3px rgba(150, 150, 150, 0.69);}
+
+#signup-container{position:relative;top:-50px;left:50%;width:98%;margin:0 0 0 -49%;background-color:#FFF;}
+
+#logo-container{float:left;width:30%;height:300px;background-image:url(http://img.almanacmedia.co.uk/dealchasrlogo.png);
+background-size:contain;background-position:center center;background-repeat:no-repeat;margin:50px 0 0 0;}
+
+#signup-form{float:right;width:60%;margin:50px 10% 0 0;text-align:left;}
+#signup-form .signup-header{font-family:'Amiko', sans-serif;font-size:200%;font-weight:bold;color:#F9A603;margin:0;}
+#signup-form .signup-chaser{font-family:'Amiko', sans-serif;font-size:100%;color:#F9A603;margin:0;}
+#signup-form .signup-chaser a:link{color:#F9A603;text-decoration:underline;}
+#signup-form .signup-chaser a:visited{color:#F9A603;text-decoration:underline;}
+#signup-form .signup-chaser a:hover{color:#F9A603;text-decoration:underline;}
+
+#signup-form .form-header{font-family:'Amiko', sans-serif;font-size:100%;color:#F9A603;margin:0;width:100%;border-bottom:1px solid #F9A603;}
+#signup-form .info-container{font-family:'Amiko', sans-serif;font-size:100%;color:#000;margin:0;width:100%;background-color:#8bcc8b78;border-radius:3px;
+padding:7px;}
+#signup-form .info-container a:link{color:#000;text-decoration:underline;}
+#signup-form .info-container a:visited{color:#000;text-decoration:underline;}
+#signup-form .info-container a:hover{color:#000;text-decoration:underline;}
+
+#signup-form .error-container{font-family:'Amiko', sans-serif;font-size:100%;color:red;margin:0;width:100%;}
+
+#signup-form label{font-family:'Amiko', sans-serif;font-size:100%;font-weight:bold;color:#F9A603;margin:0;}
+#signup-form .text-box{width:100%;height:40px;border:2px solid #F9A603;border-radius:3px;
+font-family:'Amiko', sans-serif;font-size:150%;font-weight:bold;color:#F9A603;padding:0 0 0 10px;}
+#signup-form .submit-button{width:100%;height:40px;border-radius:3px;border:none;
+font-family:'Amiko', sans-serif;font-size:150%;font-weight:bold;color:#FFF;padding:0 0 0 10px;background-color:#F9A603;cursor:pointer;}
+
+@media(max-width:600px){
+	#signup-container{top:-120px;}
+	#header-container h1{font-size:400%;}
+	#logo-container{display:none;}
+	#signup-form{position:relative;float:none;width:80%;padding: 10px 0 0 7%;}
+}
