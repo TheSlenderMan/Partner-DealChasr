@@ -6,6 +6,10 @@ $(document).ready(function(){
     $(document).on("click", ".venue-details-submit-button", function(){
        submitDetails();
     });
+
+    $(document).on("click", ".venue-details-validate-button", function(){
+        resendEmail($(this));
+    });
 	
 	$(document).on("click", ".venue-details-status-button", function(){
 		var state = $(this).attr("data");
@@ -57,6 +61,121 @@ $(document).ready(function(){
             }
         });
     });
+	
+	$(document).on("click", ".p-upgrade-btn", function(){
+		var th = $(this);
+		var newTier = th.attr('id');
+		th.html("UPDATING ACCOUNT...");
+		if(confirm("Are you sure you want to upgrade/downgrade your account?")){
+			$.ajax({
+				url: 'http://api.almanacmedia.co.uk/venues/upgrade',
+				type: 'POST',
+				dataType: 'JSON',
+				data:{
+					"venueID": window.venueID,
+					"oldTier": window.tier,
+					"newTier": newTier,
+					"email": window.venueEmail
+				},
+				headers:{
+					"Authorization": "DS1k1Il68_uPPoD"
+				},
+				success: function(json){
+					if(json.upgraded == 1){
+						th.html("ACCOUNT UPGRADED... ");
+						setTimeout(function(){
+							window.location.href = "http://my.dealchasr.co.uk?upgraded=true";
+						}, 2500);
+					}
+				},
+				error: function(e){
+					console.log(e);
+				}
+			});
+		}
+	});
+	
+	$(document).on("click", "#upgrade-account", function(){
+		var modal = $("#modal-cover");
+        var modalText = $(".modal-message");
+        modal.show();
+
+		if(window.tier == 1){
+			var p1 = 2;
+			var title1 = "PRO";
+			var html1 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
+						"<div class='p-divider' ></div><br /><br />" + 
+						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
+						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
+						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br /><br /><br />" + 
+						"<div class='p-upgrade-btn' id='2' >UPGRADE NOW</div>";
+			var p2 = 3;
+			var title2 = "PREMIUM";
+			var html2 = "<h1>&pound;5.99</h1><br /><span class='p-dur' >Per month</span>" + 
+						"<div class='p-divider' ></div><br /><br />" + 
+						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
+						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
+						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br />" + 
+						"<span class='product-header' >Premium pin on map</span><span class='product-info' ></span><br /><br /><br /><br />" + 
+						"<div class='p-upgrade-btn' id='3' >UPGRADE NOW</div>";
+		} else if(window.tier == 2){
+			var p1 = 1;
+			var title1 = "FREE";
+			var html1 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
+						"<div class='p-divider' ></div><br /><br />" + 
+						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >50 (Reddemable)</span><br /><br />" + 
+						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >Free</span><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >When vouchers are available</span><br /><br /><br /><br />" + 
+						"<div class='p-upgrade-btn' id='1' >DOWNGRADE NOW</div>";
+			var p2 = 3;
+			var title2 = "PREMIUM";
+			var html2 = "<h1>&pound;5.99</h1><br /><span class='p-dur' >Per month</span>" + 
+						"<div class='p-divider' ></div><br /><br />" + 
+						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
+						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
+						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br />" + 
+						"<span class='product-header' >Premium pin on map</span><span class='product-info' ></span><br /><br /><br /><br />" + 
+						"<div class='p-upgrade-btn' id='3' >UPGRADE NOW</div>";
+		} else {
+			var p1 = 1;
+			var title1 = "FREE";
+			var html1 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
+						"<div class='p-divider' ></div><br /><br />" + 
+						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >50 (Reddemable)</span><br /><br />" + 
+						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >Free</span><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >When vouchers are available</span><br /><br /><br /><br />" + 
+						"<div class='p-upgrade-btn' id='1' >DOWNGRADE NOW</div>";
+			var p2 = 2;
+			var title2 = "PRO";
+			var html2 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
+						"<div class='p-divider' ></div><br /><br />" + 
+						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
+						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
+						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br /><br /><br />" + 
+						"<div class='p-upgrade-btn' id='2' >DOWNGRADE NOW</div>";
+		}
+		
+		var upgradeHTML = "<span class='p-title' >UPGRADE YOUR ACCOUNT</span><br />" + 
+						  "<br />Upgrading your account is easy and instant! Just choose your package below, hit upgrade or downgrade and away you go.<br /><br />" + 
+						  "Note: your invoice date will stay the same. If you are upgrading from FREE to either PRO or PREMIUM any vouchers redeemed between your upgrade and " +
+						  " next invoice will be chargeable.<br /><br /><br />";
+		
+		upgradeHTML += "<div class='upgrade-container' >" + 
+					   "<div class='product-1' >" + 
+					   "<span class='p-title' >" + title1 + "</span><br /><br />" + 
+					   html1 + "</div><br /><br />" +
+					   "<div class='product-2' >" + 
+					   "<span class='p-title' >" + title2 + "</span><br /><br />" + 
+					   html2 + "</div></div><br /><br />";
+					   
+		upgradeHTML += "<br /><br /><div class='close-modal-centered' >CLOSE</div>";
+					   
+        modalText.html(upgradeHTML);
+	});
 });
 
 function getDetailsView(){
@@ -116,13 +235,23 @@ function getDetailsView(){
     details += "<br /><br /><div class='venue-details-submit' >" +
         "<button type='text' class='venue-details-submit-button' id='venue-submit' >SUBMIT CHANGES</button>" +
         "</div>";
+
+    if(window.validated == 0){
+        details += "<br /><br /><div class='venue-details-status' >" +
+            "<button type='text' class='venue-details-validate-button' id='venue-validate' >VALIDATE EMAIL</button>" +
+            "</div>";
+    }
+	
+	if(window.tier < 3){
+		details += '<div class="ribbon" id="upgrade-account" ><div class="ribbon-stitches-top"></div><strong class="ribbon-content"><h1>UPGRADE</h1></strong><div class="ribbon-stitches-bottom"></div></div>';
+	}
 		
-		var statusStr = "";
-		if(window.accountActive == 1){
-			statusStr = "DEACTIVATE ACCOUNT";
-		} else {
-			statusStr = "ACTIVATE ACCOUNT";
-		}
+	var statusStr = "";
+	if(window.accountActive == 1){
+		statusStr = "DEACTIVATE ACCOUNT";
+	} else {
+		statusStr = "ACTIVATE ACCOUNT";
+	}
 		
 	details += "<br /><br /><div class='venue-details-status' >" +
         "<button type='text' class='venue-details-status-button' id='venue-status' data=" + window.accountActive + " >" + statusStr + "</button>" +

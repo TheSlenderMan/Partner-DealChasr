@@ -43,7 +43,12 @@ $(document).ready(function(){
             },
             success: function(json){
                 if(json.loggedIn == 1){
-                    window.location.href = "http://my.dealchasr.co.uk/app/index.php?userID=" + json.userID;
+					if(window.appShow == 1){
+						var add = "&app_location=1";
+					} else {
+						var add = "";
+					}
+                    window.location.href = "http://my.dealchasr.co.uk/app/index.php?userID=" + json.userID + add;
                 } else {
                     console.log(json.message);
                     $(".error-text").html(json.message);

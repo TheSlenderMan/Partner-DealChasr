@@ -65,7 +65,7 @@ function getInvoice(id){
 					subAmount  = 0.00;
 				} else {
 					tierString = "PREMIUM ACCOUNT";
-					subAmount = 9.99;
+					subAmount = 5.99;
 				}
 				
 				var paymentsTotal = 0;
@@ -200,7 +200,7 @@ function getStatsView(){
 
             statsView += "<div class='chart-title' >REDEMPTIONS THIS MONTH</div><div id='stats-chart' style='height: 250px;'></div>";
             
-			statsView += "<br /><br /><br /><div class='chart-title' >INVOICES (LAST 5)</div><br /><br /><br />";
+			statsView += "<br /><br /><br /><div class='chart-title' >INVOICES (LAST 5)</div><br /><br />";
 			statsView += "<div id='invoices-container' >";
 			if(json.invoices.length == 0){
 				statsView += "<br /><br />NO INVOICES TO SHOW";
@@ -229,7 +229,7 @@ function getStatsView(){
 					"</div><br /><br />";
 				});
 			}
-			statsView += "</div><br /><br /><br />";
+			statsView += "</div><br /><br />";
 			
 			statsView += "</div>";
 
@@ -237,6 +237,7 @@ function getStatsView(){
 
 			if(json.chartData.length == 0){
 				$("#stats-chart").html("<br /><br />NO MONTHLY STATS AVAILABLE");
+				$("#stats-chart").css('height', '40px');
 			} else {
 				var arr = [];
 				$.each(json.chartData, function(i, o){

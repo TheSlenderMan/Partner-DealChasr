@@ -3,60 +3,65 @@ body{margin:0;background-color:#F9A603;}
 #master-container{position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url(http://img.almanacmedia.co.uk/dealchasrlogo.png);
 background-repeat:no-repeat;background-position:center center;background-size:contain;}
 
-#links-container{position:relative;top:5vh;left:0;width:30vw;}
-#links-container .main-link{width:200px;font-family:'Josefin Sans', sans-serif;
+#links-container{position:relative;top:5vh;left:0;width:30vw;z-index:99999;}
+#links-container .main-link{width:200px;font-family:'Amiko', sans-serif;
     font-size:18px;color:#F9A603;cursor:pointer;padding:10px;background-color: #FFFFFF;z-index:99999;
     margin:15px 0 0 0;}
 
 #action-container{display:none;position:absolute;top:0;left:50vw;width:80vw;height:100vh;background-color:#FFFFFF;overflow-x:scroll;
 margin:0 0 0 -40vw;}
-.close-action{position:fixed;top:10px;right:0;z-index:9999;font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;background-color:#FFF;
+.close-action{position:fixed;top:10px;right:0;z-index:9999;font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;background-color:#FFF;
     padding:20px;font-weight:bold;margin-top:-20px;cursor:pointer;border-radius:5px;}
 
-#action-container label{font-family: 'Josefin Sans', sans-serif;font-size: 12px;color: #000000;font-weight: bold;margin-top: 10px;}
+#action-container label{font-family: 'Amiko', sans-serif;font-size: 12px;color: #000000;font-weight: bold;margin-top: 10px;}
 	
 #modal-cover{display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,0.8);z-index:99999;
 overflow-y:auto;overflow-x:hidden;}
 .modal-message{position:relative;top:50px;left:50vw;width:76vw;padding:2vw;border-radius:5px;background-color:#FFF;
-    font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;
-margin:0 0 0 -40vw;}
-.close-modal, .close-modal-active, .close-modal-centered, .close-modal-done{background-color:#F9A603;border:none;color:#FFF;font-weight:bold;padding:5px;
-border-radius:5px;cursor: pointer;}
+    font-family:'Amiko', sans-serif;font-size:18px;color:#fff;font-weight:bold;text-align:center;
+margin:0 0 0 -40vw;background-image:url(http://img.almanacmedia.co.uk/cocktail.jpg); background-size:cover;}
+.close-modal, .close-modal-active, .close-modal-centered, .close-modal-done{width:100%;height:40px;background-color:#F9A603;border:none;text-align:center;line-height:40px;
+    font-family: 'Amiko', sans-serif;font-weight:bold;color:#FFF;font-size:18px;cursor:pointer;}
 
 .loading{position:relative;top:50%;left:50%;width:100px;height:100px;text-align:center;margin:-50px 0 0 -50px;
-    font-family:'Josefin Sans', sans-serif;font-size:25px;color:#F9A603;font-weight:bold;}
+    font-family:'Amiko', sans-serif;font-size:25px;color:#F9A603;font-weight:bold;}
 
-#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:200px;font-family:'Josefin Sans', sans-serif;
+#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:200px;font-family:'Amiko', sans-serif;
     font-size:25px;color:#FFF;font-weight:bold;text-align:center;padding:20px 0 0 0;text-shadow: 2px 2px #000000;overflow:hidden;
 background-size:cover;background-position:center center;}
 .logout-button{background-color:#FFF;border:none;color:#F9A603;padding:10px;border-radius:5px;cursor:pointer;font-weight:bold;}
 
-.part-title{width:100%;height:30px;font-family:'Josefin Sans', sans-serif;font-size:15px;color:#000000;font-weight:bold;
+.part-title{width:100%;height:30px;font-family:'Amiko', sans-serif;font-size:15px;color:#000000;font-weight:bold;
 text-align:center;line-height:30px;}
 
 .selected{background-color:#F9A603 !important;color:#FFF !important;}
 .spacer{position:relative;top:20px;left:5%;width:90%;height:200px;border-radius:5px;margin:20px 0 0 0;}
 
-.text-one{width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+.text-one{width:100%;height:50px;border:1px solid #F9A603;font-family:'Amiko', sans-serif;font-size:20px;color:#000000;
 font-weight:bold;}
-.text-one-center{width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+.text-one-center{width:100%;height:50px;border:1px solid #F9A603;font-family:'Amiko', sans-serif;font-size:20px;color:#000000;
 font-weight:bold;text-align:center;}
-.text-two{width:100%;height:100px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+.text-two{width:100%;height:100px;border:1px solid #F9A603;font-family:'Amiko', sans-serif;font-size:20px;color:#000000;
 font-weight:bold;}
-.text-two-center{width:100%;height:100px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+.text-two-center{width:100%;height:100px;border:1px solid #F9A603;font-family:'Amiko', sans-serif;font-size:20px;color:#000000;
 font-weight:bold;text-align:center;}
 
-.ui-timepicker-input {width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+.ui-timepicker-wrapper{width:50% !important;text-align:center;}
+.ui-timepicker-input {width:100%;height:50px;border:1px solid #F9A603;font-family:'Amiko', sans-serif;font-size:20px;color:#000000;
 font-weight:bold;text-align:center;}
-.ui-timepicker-am{font-family:'Josefin Sans', sans-serif;
-    font-size:20px;color:#000000;font-weight:bold;}
-.ui-timepicker-pm{font-family:'Josefin Sans', sans-serif;
-    font-size:20px;color:#000000;font-weight:bold;}
+.ui-timepicker-am:nth-child(even){font-family:'Amiko', sans-serif;
+    font-size:20px;color:#FFF;font-weight:bold;height:30px;line-height:30px;background-color:#F9a603;}
+.ui-timepicker-am:nth-child(odd){font-family:'Amiko', sans-serif;
+    font-size:20px;color:#FFF;font-weight:bold;height:30px;line-height:30px;background-color:#ffc85d;}
+.ui-timepicker-pm:nth-child(even){font-family:'Amiko', sans-serif;
+    font-size:20px;color:#FFF;font-weight:bold;height:30px;line-height:30px;background-color:#F9a603;}
+.ui-timepicker-pm:nth-child(odd){font-family:'Amiko', sans-serif;
+    font-size:20px;color:#FFF;font-weight:bold;height:30px;line-height:30px;background-color:#ffc85d;}
 
-.hasDatepicker{width:100%;height:50px;border:1px solid #F9A603;font-family:'Josefin Sans', sans-serif;font-size:20px;color:#000000;
+.hasDatepicker{width:100%;height:50px;border:1px solid #F9A603;font-family:'Amiko', sans-serif;font-size:20px;color:#000000;
 font-weight:bold;text-align:center;}
 
-.control {font-family: 'Josefin Sans', sans-serif;display: block;position: relative;padding-left: 30px;margin-bottom: 5px;padding-top: 3px;cursor: pointer;
+.control {font-family: 'Amiko', sans-serif;display: block;position: relative;padding-left: 30px;margin-bottom: 5px;padding-top: 3px;cursor: pointer;
 font-size: 20px;}
     .control input {position: absolute;z-index: -1;opacity: 0;}
 .control_indicator {position: absolute;top: 2px;left: 0;height: 20px;width: 20px;background: #FFF;border: 1px solid #F9A603;}
@@ -67,20 +72,114 @@ font-size: 20px;}
 
 .control input:checked ~ .control_indicator {background: #F9A603;}
 .control:hover input:not([disabled]):checked ~ .control_indicator,
-.control input:checked:focus ~ .control_indicator {background: #0E6647;}
+.control input:checked:focus ~ .control_indicator {background: #F9A603;}
 .control input:disabled ~ .control_indicator {background: #e6e6e6;opacity: 0.6;pointer-events: none;}
 .control_indicator:after {box-sizing: unset;content: '';position: absolute;display: none;}
 .control input:checked ~ .control_indicator:after {display: block;}
 .control-checkbox .control_indicator:after {left: 8px;top: 4px;width: 3px;height: 8px;border: solid #ffffff;border-width: 0 2px 2px 0;transform: rotate(45deg);}
 .control-checkbox input:disabled ~ .control_indicator:after {border-color: #7b7b7b;}
 
+.resend-email{width:100%;height:40px;background-color:#F9A603;border:none;text-align:center;line-height:40px;
+    font-family:'Amiko', sans-serif;font-weight:bold;color:#FFF;font-size:18px;cursor:pointer;}
+
+.ribbon {
+   width: 250px;
+   position: relative;
+   top:0;
+   left:50%;
+   margin:100px 0 0 -125px;
+   cursor:pointer;
+   text-align: center;
+   font-size: 13px!important;
+   background: #bf7c00;
+   background: -webkit-gradient(linear, left top, left bottom, from(#bf7c00), to(#f9a703));
+   background: -webkit-linear-gradient(top, #bf7c00, #f9a703);
+   background: -moz-linear-gradient(top, #bf7c00, #f9a703);
+   background: -ms-linear-gradient(top, #bf7c00, #f9a703);
+   background: -o-linear-gradient(top, #bf7c00, #f9a703);
+   background-image: -ms-linear-gradient(top, #bf7c00 0%, #f9a703 100%);
+   -webkit-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+   -moz-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+   box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+   font-family: 'Helvetica Neue',Helvetica, sans-serif;
+   }
+.ribbon h1 {
+   font-size: 25px!important;
+   color: #ffffff;
+   text-shadow: #ab9898 0 1px 0;
+   margin:0px;
+   padding: 15px 10px;
+   }
+.ribbon:before, .ribbon:after {
+   content: '';
+   position: absolute;
+   display: block;
+   bottom: -1em;
+   border: 1.5em solid #d18e13;
+   z-index: -1;
+   }
+.ribbon:before {
+   left: -2em;
+   border-right-width: 1.5em;
+   border-left-color: transparent;
+   -webkit-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
+   -moz-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
+   box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
+   }
+.ribbon:after {
+   right: -2em;
+   border-left-width: 1.5em;
+   border-right-color: transparent;
+   -webkit-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
+   -moz-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
+   box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
+   }
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+   border-color: #6b4600 transparent transparent transparent;
+   position: absolute;
+   display: block;
+   border-style: solid;
+   bottom: -1em;
+   content: '';
+   }
+.ribbon .ribbon-content:before {
+   left: 0;
+   border-width: 1em 0 0 1em;
+   }
+.ribbon .ribbon-content:after {
+   right: 0;
+   border-width: 1em 1em 0 0;
+   }
+.ribbon-stitches-top {
+   margin-top:2px;
+   border-top: 1px dashed rgba(0, 0, 0, 0.2);
+   -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+   -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+   box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+   }
+.ribbon-stitches-bottom {
+   margin-bottom:2px;
+   border-top: 1px dashed rgba(0, 0, 0, 0.2);
+   -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+   -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+   box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
+   }
+	
 @media (max-width: 800px){
 	#action-container{display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background-color:#FFFFFF;overflow-x:scroll;
 	margin:0;}
 
-	#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:35vh;font-family:'Josefin Sans', sans-serif;
+	#venue-message{position:absolute;bottom:0;left:0;width:100vw;height:35vh;font-family:'Amiko', sans-serif;
 		font-size:25px;color:#FFF;font-weight:bold;text-align:center;padding:20px 0 0 0;text-shadow: 2px 2px #000000;overflow:hidden;
 	background-size:cover;background-position:center center;}
+}
+
+@media (orientation:landscape) and (max-width:600px){
+    #links-container{position:relative;top:0;left:0;width:100vw;z-index:99999;}
+    #links-container .main-link{float:left;display:inline-block;width:200px;font-family:'Amiko', sans-serif;
+        font-size:12px;color:#F9A603;cursor:pointer;padding:10px;background-color: #FFFFFF;z-index:99999;
+        margin:15px 0 0 10px;}
+    .logout-button{position:absolute;top:10px;right:10px;}
 }
 
 

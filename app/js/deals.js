@@ -38,7 +38,7 @@ $(document).ready(function(){
         dealDetailsView.html(dealDetails);
 
         $('#dealDate').datepicker({ dateFormat: "yy-mm-dd"});
-        $('#dealTime').timepicker({ 'timeFormat': 'H:i:s' });
+        $('#dealTime').timepicker({ 'timeFormat': 'H:i:s', 'orientation': 'tl' });
     });
 
     $(document).on("click", ".deal-submit-button", function(){

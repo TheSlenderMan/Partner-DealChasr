@@ -10,5 +10,7 @@
     ],
     "theme_color": "#F9A603",
     "background_color": "#F9A603",
-    "display": "standalone"
+    "display": "standalone",
+    "orientation": "portrait",
+	"start_url": "index.php?app_location=1"
 }

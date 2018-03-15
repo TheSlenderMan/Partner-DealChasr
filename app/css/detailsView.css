@@ -1,21 +1,26 @@
 #venue-details{position:relative;top:0;left:0;width:100%;height:100%;}
 
 .venue-details-title{position:relative;top:0;left:0;width:100%;height:200px;padding:20px 0 20px 0;background-size:cover;background-repeat:no-repeat;
-    text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;color:#FFFFFF;text-shadow: 2px 2px #000000;}
+    text-align:center;font-family:'Amiko', sans-serif, sans-serif;font-size:18px;color:#FFFFFF;text-shadow: 2px 2px #000000;}
 
 .upload-button {position:relative;top:30px;left:0;overflow:hidden;width:100%;height:40px;text-align:center;}
 .upload-button-btn {border:none;color:#FFF;background-color:#F9A603;padding:8px 20px;border-radius:8px;
-    font-family:'Josefin Sans', sans-serif;font-size:18px;font-weight:bold;}
+    font-family:'Amiko', sans-serif;font-size:18px;font-weight:bold;}
 .upload-button input[type=file] {font-size: 100px;position: absolute;left: 0;top: 0;opacity: 0;}
 
 .venue-details-container{position:relative;top:0;left:50%;width:90%;height:60%;margin:0 0 0 -45%;}
 
 .venue-details-submit-button{display:inline-block;width:100%;text-align:center;
-font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
+font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
 cursor:pointer;background-color:#FFF;border-bottom:1px solid #F9A603;border-left:1px solid #F9A603;
 border-right:1px solid #F9A603;}
 
 .venue-details-status-button{display:inline-block;width:100%;text-align:center;
-font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
+font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
 cursor:pointer;background-color:#FFF;border-bottom:1px solid #F9A603;border-left:1px solid #F9A603;
 border-right:1px solid #F9A603;}
+
+.venue-details-validate-button{display:inline-block;width:100%;text-align:center;
+    font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
+    cursor:pointer;background-color:#FFF;border-bottom:1px solid #F9A603;border-left:1px solid #F9A603;
+    border-right:1px solid #F9A603;}

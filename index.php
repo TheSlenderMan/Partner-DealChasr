@@ -23,6 +23,11 @@ if(isset($_GET['valExpired'])){
 } else {
 	$exp = 0;
 }
+if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
+	$sa = 1;
+} else {
+	$sa = 0;
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -31,7 +36,6 @@ if(isset($_GET['valExpired'])){
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="stylesheet" href="http://my.dealchasr.co.uk/css/login.css" />
-		<link rel="stylesheet" type="text/css" href="http://my.dealchasr.co.uk/css/ath.css">
 
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -43,18 +47,47 @@ if(isset($_GET['valExpired'])){
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" ></script>
         <script src="http://my.dealchasr.co.uk/js/login.js" type="text/javascript" ></script>
-		<script src="http://my.dealchasr.co.uk/js/ath.js"></script>
 		
 		<script>
+		var isMobile = {
+			Android: function() {
+				return navigator.userAgent.match(/Android/i);
+			},
+			BlackBerry: function() {
+				return navigator.userAgent.match(/BlackBerry/i);
+			},
+			iOS: function() {
+				return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+			},
+			Opera: function() {
+				return navigator.userAgent.match(/Opera Mini/i);
+			},
+			Windows: function() {
+				return navigator.userAgent.match(/IEMobile/i);
+			},
+			any: function() {
+				return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+			}
+		};
+		
 		var inew = <?php echo $new; ?>;
 		var validated = <?php echo $val; ?>;
 		var exp = <?php echo $exp; ?>;
+		var appShow = <?php echo $sa; ?>;
             $(document).ready(function(){
-			   addToHomescreen({
-				   skipFirstVisit: true,
-				   maxDisplayCount: 3
-			   });
-			   
+			   if(appShow == 0){
+				   var i = $("#install");
+				   i.show();
+						
+				   if(isMobile.Android()){
+					   i.css('background-image', 'url(http://img.almanacmedia.co.uk/android-app.jpg)');
+				   } else if(isMobile.iOS()){
+					   i.css('background-image', 'url(http://img.almanacmedia.co.uk/ios-app.jpg)');
+				   } else {
+					   i.append("INSTALL THE APP ON YOUR PHONE.<br />Just open my.dealchasr.co.uk on your phones browser for instructions.");
+					   i.css('height', '50px')
+				   }
+			   }
 			   if(inew == 1){
 				   $("#newVenue").show();
 			   }
@@ -72,6 +105,9 @@ if(isset($_GET['valExpired'])){
 			   });
 			   $(document).on("click", ".close-val", function(){
 				   $("#val-expired").hide();
+			   });
+			   $(document).on("click", ".close-install", function(){
+				   $("#install").hide();
 			   });
 			   $(document).on("click", ".resend-validation, .resend-val", function(){
 				   var th = $(this);
@@ -100,6 +136,9 @@ if(isset($_GET['valExpired'])){
 
     </head>
     <body>
+		<div id="install" >
+			<div class="close-install" >X</div>
+		</div>
 		<div id="newVenue" >
 			<div class="welcome-screen" >
 				<h1> WELCOME TO DEALCHASR </h1><br /><br />

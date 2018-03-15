@@ -5,21 +5,21 @@
 .active-deal{position:relative;top:20px;left:5%;width:90%;border-radius:5px;-webkit-box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);margin:20px 0 0 0;}
 
-.voucher-title{padding:5px;width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;
+.voucher-title{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
     color:#F9A603;font-weight:bold;}
-.deal-title{padding:5px;width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;
+.deal-title{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
     color:#0055ff;font-weight:bold;}
 
-.voucher-expires{padding:5px;width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:14px;
+.voucher-expires{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:14px;
     color:#000000;font-weight:bold;}
-.deal-date{padding:5px;width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:14px;
+.deal-date{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:14px;
     color:#000000;font-weight:bold;}
 
-.voucher-count{padding:5px;width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:20px;
+.voucher-count{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:20px;
     color:#F9A603;font-weight:bold;}
 
 
-.voucher-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;
+.voucher-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
     color:#FFFFFF;font-weight:bold;background-color:#F9A603;cursor:pointer;}
-.deal-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;
+.deal-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
     color:#FFFFFF;font-weight:bold;background-color:#0055FF;cursor:pointer;}

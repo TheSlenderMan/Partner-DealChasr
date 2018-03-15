@@ -1,21 +1,22 @@
 .stats-view{    position: relative;  top: 0;  left: 0;  width: 100%;  height: 100%;}
 
-.redeemed-vouchers{float: left;width: 39%;margin: 10px 0 10px 10px;background-color: #FFF;padding: 5px;text-align: center;
-font-family: 'Josefin Sans', sans-serif;font-size: 3vw;font-weight: bold;color: #f9a603;border:1px solid #f9a603}
+.redeemed-vouchers{position:relative;left:50%;display: inline-block;width: 20%;height:auto;margin: 10px 0 10px 10px;background-color: #ffe5b2;padding: 20px 10px 0 10px;text-align: center;
+font-family: 'Amiko', sans-serif;font-size: 1vw;font-weight: bold;color: #F9A603;border-radius:3px;}
 
-.v-count-text{position: relative;font-size: 17vw;top: 20px;}
+.v-count-text{font-size: 10vw;top: 20px;color:#FFF;}
 
-.redeemed-deals{float: right;width: 39%;margin: 10px 0 10px 10px;background-color: #FFF;padding: 5px;text-align: center;
-font-family: 'Josefin Sans', sans-serif;font-size: 3vw;font-weight: bold;color: #f9a603;border:1px solid #f9a603}
+.redeemed-deals{display: inline-block;width: 20%;height:auto;margin: 10px 0 10px 10px;background-color: #ffe5b2;padding: 20px 10px 0 10px;text-align: center;
+font-family:'Amiko', sans-serif;font-size: 1vw;font-weight: bold;color: #F9A603;border-radius:3px;}
 
-.d-count-text{position: relative;font-size: 17vw;top: 20px;}
+.d-count-text{font-size: 10vw;top: 20px;color:#FFF;}
 
-.chart-title{font-family:'Josefin Sans', sans-serif;font-size:28px;color:#FFF;font-weight:bold;text-align:center;
-width:100%;background-color:#F9A603;padding:10px 0 10px 0;}
+.chart-title{font-family:'Amiko', sans-serif;font-size:28px;color:#F9A603;font-weight:bold;text-align:center;
+width:100%;background-color:#ffe5b2;padding:10px 0 10px 0;}
 
-#stats-chart{font-family:'Josefin Sans', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
+#stats-chart{font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
 
-#invoices-container{position:relative;width:80%;top:0;left:50%;margin:0 0 0 -40%;}
+#invoices-container{position:relative;width:80%;top:0;left:50%;margin:0 0 0 -40%;
+    font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
 #invoice{width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;font-weight:bold;}
 
 .invoice-date{display:inline-block;width:150px;height:40px;line-height:40px;border:1px solid #F9A603;color:#F9A603;font-size:18px;
@@ -27,3 +28,9 @@ margin:2px 5px 0 5px;}
 .invoice-view{display:inline-block;width:150px;height:40px;line-height:40px;border:1px solid #F9A603;color:#F9A603;font-size:20px;
 margin:2px 5px 0 5px;cursor:pointer;}
 .invoice-view:hover{color:#FFF;background-color:#F9A603;}
+
+@media(max-width:600px){
+    .redeemed-vouchers{font-size:2vw;height:auto;padding:5px;}
+    .redeemed-deals{font-size:2vw;height:auto;padding:5px;}
+    .chart-title{font-size:18px;}
+}

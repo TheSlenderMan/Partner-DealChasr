@@ -9,58 +9,57 @@ $(document).ready(function(){
         var pageID = $(this).attr("id");
 
         var action = $("#action-container");
-        action.show("fast", function(){
-			$("#master-container").css("opacity", "0.5");
-			setTimeout(function(){
-				switch (pageID){
-					case "add_voucher":
-						if(window.accountActive == 1){
-							getAddVoucherView();
-						} else {
-							$(".loading").html("VOUCHERS ARE UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
-						}
-						break;
-					case "add_deal":
-						if(window.venueVouchersRemaining == 'unlimited' && window.accountActive == 1){
-							getAddDealView();
-						} else {
-							$(".loading").html("DEALS ARE UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
-						}
-						break;
-					case "active_deal":
-						if(window.accountActive == 1){
-							getActiveView();
-						} else {
-							$(".loading").html("ACTIVITY UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
-						}
-						break;
-					case "stats":
-						getStatsView();
-						break;
-					case "venue_details":
-						if(window.accountActive == 1){
-							getDetailsView();
-						} else {
-							$(".loading").html("DETAILS UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
-						}
-						break;
-					default:
-						if(window.accountActive == 1){
-							getAddVoucherView();
-						} else {
-							$(".loading").html("VOUCHERS ARE UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
-						}
-						break;
-				}
-			}, 1500);
-        });
+        action.show();
+		$("#master-container").css("opacity", "0.5");
+		setTimeout(function(){
+			switch (pageID){
+				case "add_voucher":
+					if(window.accountActive == 1){
+						getAddVoucherView();
+					} else {
+						$(".loading").html("VOUCHERS ARE UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
+					}
+					break;
+				case "add_deal":
+					if(window.venueVouchersRemaining == 'unlimited' && window.accountActive == 1){
+						getAddDealView();
+					} else {
+						$(".loading").html("DEALS ARE UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
+					}
+					break;
+				case "active_deal":
+					if(window.accountActive == 1){
+						getActiveView();
+					} else {
+						$(".loading").html("ACTIVITY UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
+					}
+					break;
+				case "stats":
+					getStatsView();
+					break;
+				case "venue_details":
+					if(window.accountActive == 1){
+						getDetailsView();
+					} else {
+						$(".loading").html("DETAILS UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
+					}
+					break;
+				default:
+					if(window.accountActive == 1){
+						getAddVoucherView();
+					} else {
+						$(".loading").html("VOUCHERS ARE UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
+					}
+					break;
+			}
+		}, 1500);
     });
 
     $(document).on("click", ".close-action", function(){
         var action = $("#action-container");
 		action.html("<div class='loading' >LOADING</div>");
 		setTimeout(function(){
-			action.hide("fast");
+			action.hide();
 			$("#master-container").css("opacity", "1");
 			$("#ui-datepicker-div").remove();
 		}, 1000);
@@ -106,7 +105,7 @@ $(document).ready(function(){
 
         voucherDetailsView.html(voucherDetails);
 
-        $('#endDate').timepicker({ 'timeFormat': 'H:i:s' });
+        $('#endDate').timepicker({ 'timeFormat': 'H:i:s', 'orientation': 'tl' });
     });
 
     $(document).on("click", ".voucher-enddate", function(e){
@@ -114,7 +113,12 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".logout-button", function(e){
-        window.location.href = "http://my.dealchasr.co.uk/app/logout.php";
+		if(window.app == 1){
+			var add = "?app_location=1";
+		} else {
+			var add = "";
+		}
+        window.location.href = "http://my.dealchasr.co.uk/app/logout.php" + add;
     });
 
     $(document).on("click", ".voucher-submit-button", function(){
@@ -219,11 +223,38 @@ $(document).ready(function(){
 			action.hide("fast");
 			$("#master-container").css("opacity", "1");
 			$("#ui-datepicker-div").remove();
-			window.created = 0;
+            window.created = 0;
 		}, 1000);
       
     });
+
+    $(document).on("click", ".resend-email", function(){
+        var th = $(this);
+        th.html("RESENDING...");
+        resendEmail(th);
+    });
 });
+
+function resendEmail(th){
+    $.ajax({
+        url: 'http://api.almanacmedia.co.uk/venues/resendvalidation',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            "email": window.venueEmail,
+            "vid": window.venueID
+        },
+        headers: {
+            "Authorization": "DS1k1Il68_uPPoD"
+        },
+        success: function(json){
+            th.html("EMAIL SENT");
+        },
+        error: function(e){
+            console.log(e);
+        }
+    });
+}
 
 function getOffers(did){
     var voucherTypeView = $("#voucher-types");
@@ -308,75 +339,89 @@ function getAddVoucherView(){
 
 function getVenueDetails(){
 	var action = $("#action-container");
-    action.show("fast", function(){
-		$("#master-container").css("opacity", "0.5");
-		$.ajax({
-			url: "http://api.almanacmedia.co.uk/users/venue?userID=" + window.uid,
-			type: "GET",
-			dataType: "JSON",
-			headers: {
-				"Authorization": "DS1k1Il68_uPPoD"
-			},
-			success: function(json){
-				if(json.data.found == 1){
-					var venue = json.data.venues;
-					var venueView = $("#venue-message");
+    action.show();
+	$("#master-container").css("opacity", "0.5");
+	$.ajax({
+		url: "http://api.almanacmedia.co.uk/users/venue?userID=" + window.uid,
+		type: "GET",
+		dataType: "JSON",
+		headers: {
+			"Authorization": "DS1k1Il68_uPPoD"
+		},
+		success: function(json){
+			if(json.data.found == 1){
+				var venue = json.data.venues;
+				var venueView = $("#venue-message");
 
-					window.venueID = venue.id;
-					window.venueName = venue.vName;
-					window.venueHeader = venue.vHeader;
-					window.venueDesc   = venue.vDescription;
-					window.venueWebsite = venue.vWebsite;
-					window.venueOpenHours = venue.vOpenHours;
-					window.venueContact = venue.vContact;
-					window.venueEmail = venue.vEmail;
-					window.venueAddressOne = venue.vAddressOne;
-					window.venueAddressTwo = venue.vAddressTwo;
-					window.venueCityTown = venue.vCityTown;
-					window.venueCounty = venue.vCounty;
-					window.venueCountry = venue.vCountry;
-					window.venuePostCode = venue.vPostCode;
-					window.venueVouchersRemaining = venue.totalRemaining;
-					window.venueVouchersUsed = venue.totalUsed;
-					window.outOf50 = '';
-					window.accountActive = venue.active;
-					
-					var activeDisplay = "";
-					
-					if(window.venueVouchersRemaining != 'unlimited'){
-						window.outOf50 = '/50';
-						$("#add_deal").css("opacity", "0.5");
-					}
-					if(window.accountActive == 0){
-						$("#add_voucher").css("opacity", "0.5");
-						$("#add_deal").css("opacity", "0.5");
-						$("#active_deal").css("opacity", "0.5");
-						$("#venue_details").css("opacity", "0.5");
-						activeDisplay = "<span style='font-size:14px;' >ACCOUNT INACTIVE/SUSPENDED</span><br />";
-					} else {
-						activeDisplay = "<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
-										"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />";
-					}
-
-					venueView.css("background-image", "url(" + window.venueHeader + ")");
-					venueView.html(window.venueName.toUpperCase() + "<br />" + 
-					activeDisplay + 
-					"<input type='button' class='logout-button' value='LOG OUT' />");
-					
-					var action = $("#action-container");
-					action.html("<div class='loading' >LOADING</div>");
-					setTimeout(function(){
-						action.hide("fast");
-						$("#master-container").css("opacity", "1");
-						window.created = 0;
-					}, 1000);
-				} else {
-					console.log(json.data.venues);
-					$("#venue-message").val("NO VENUE SET UP YET!");
+				window.venueID = venue.id;
+				window.venueName = venue.vName;
+				window.venueHeader = venue.vHeader;
+				window.venueDesc   = venue.vDescription;
+				window.venueWebsite = venue.vWebsite;
+				window.venueOpenHours = venue.vOpenHours;
+				window.venueContact = venue.vContact;
+				window.venueEmail = venue.vEmail;
+				window.venueAddressOne = venue.vAddressOne;
+				window.venueAddressTwo = venue.vAddressTwo;
+				window.venueCityTown = venue.vCityTown;
+				window.venueCounty = venue.vCounty;
+				window.venueCountry = venue.vCountry;
+				window.venuePostCode = venue.vPostCode;
+				window.venueVouchersRemaining = venue.totalRemaining;
+				window.venueVouchersUsed = venue.totalUsed;
+				window.outOf50 = '';
+				window.accountActive = venue.active;
+				window.tier = venue.tier;
+				window.validated = venue.validated;
+				
+				var activeDisplay = "";
+				
+				if(window.venueVouchersRemaining != 'unlimited'){
+					window.outOf50 = '/50';
+					$("#add_deal").css("opacity", "0.5");
 				}
-			}, error: function(e){
-				console.log(e);
+				if(window.accountActive == 0){
+					$("#add_voucher").css("opacity", "0.5");
+					$("#add_deal").css("opacity", "0.5");
+					$("#active_deal").css("opacity", "0.5");
+					$("#venue_details").css("opacity", "0.5");
+					activeDisplay = "<span style='font-size:14px;' >ACCOUNT INACTIVE/SUSPENDED</span><br />";
+				} else {
+					activeDisplay = "<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
+									"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />";
+				}
+
+				venueView.css("background-image", "url(" + window.venueHeader + ")");
+				venueView.html(window.venueName.toUpperCase() + "<br />" + 
+				activeDisplay + 
+				"<input type='button' class='logout-button' value='LOG OUT' />");
+				
+				var action = $("#action-container");
+				action.html("<div class='loading' >LOADING</div>");
+				setTimeout(function(){
+					action.hide();
+					$("#master-container").css("opacity", "1");
+					window.created = 0;
+					if(window.validated == 0){
+						var modal = $("#modal-cover");
+						var modalText = $(".modal-message");
+
+						modalText.html("YOUR EMAIL ADDRESS HAS NOT BEEN VALIDATED<br /><br />Until you validate your email address" +
+							" your venue and vouchers will be available on the public app.<br /><br />" +
+							"<input type='button' class='close-modal-centered' value='DISMISS' />" +
+							"<br /><br />You didn't get an email? Click below to resend.<br />" +
+							"Alternatively you can do this on the account tab.<br /><br />" +
+							"<div class='resend-email' >RESEND EMAIL</div>");
+
+						modal.show();
+					}
+				}, 1000);
+			} else {
+				console.log(json.data.venues);
+				$("#venue-message").val("NO VENUE SET UP YET!");
 			}
-		});
+		}, error: function(e){
+			console.log(e);
+		}
 	});
 }
