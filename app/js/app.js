@@ -99,7 +99,7 @@ $(document).ready(function(){
         voucherDetails += "<br /><br /><label>HOW MANY VOUCHERS?</label><br /><input type='text' class='text-one-center' name='voucherCount' id='voucherCount' />";
         voucherDetails += "<br /><br /><label>VOUCHER DESCRIPTION</label><br />" +
             "<textarea class='text-two' maxlength='140' id='voucherDesc' ></textarea><br/><br />";
-        voucherDetails += "<label>VOUCHER END</label>" +
+        voucherDetails += "<label>VOUCHER END TIME (Your voucher must end today)</label>" +
             "<input type='text' name='endDate' id='endDate' />";
         voucherDetails += "</div><div class='spacer' ></div>";
 

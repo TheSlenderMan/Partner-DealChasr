@@ -151,7 +151,7 @@ function getInvoice(id){
 								"<input type='hidden' name='return' value='http://my.dealchasr.co.uk/thankyou/?'>" +
 								"<input type='hidden' name='cancel' value='http://my.dealchasr.co.uk/'>" +
 								"<input type='image' name='submit' border='0'" +
-								"src='https://www.paypalobjects.com/en_GB/i/btn/btn_paynowCC_LG.gif'" +
+								"src='http://img.almanacmedia.co.uk/pp_btn.png'" +
 								"alt='PayPal - The safer, easier way to pay online'>" +
 								"</form><br /><br />" +
 								"<input type='button' class='close-modal-invoice' value='CLOSE' /><br /><br />";

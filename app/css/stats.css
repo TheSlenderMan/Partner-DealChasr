@@ -17,16 +17,17 @@ width:100%;background-color:#ffe5b2;padding:10px 0 10px 0;}
 
 #invoices-container{position:relative;width:80%;top:0;left:50%;margin:0 0 0 -40%;
     font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
-#invoice{width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;font-weight:bold;}
+#invoice{width:100%;text-align:center;font-family:'Josefin Sans', sans-serif;font-size:18px;font-weight:bold;border: 1px solid #F9A603;
+padding: 5px;border-radius: 3px;background-color:#F9A603;}
 
 .invoice-date{display:inline-block;width:150px;height:40px;line-height:40px;border:1px solid #F9A603;color:#F9A603;font-size:18px;
-margin:0 5px 0 5px;}
+margin:0 5px 0 5px;background-color:#fff;}
 .invoice-amount{display:inline-block;width:150px;height:40px;line-height:40px;border:1px solid #F9A603;color:#F9A603;font-size:20px;
-margin:2px 5px 0 5px;}
+margin:2px 5px 0 5px;background-color:#fff;}
 .invoice-status{display:inline-block;width:200px;height:40px;line-height:40px;border:1px solid #F9A603;color:#F9A603;font-size:20px;
-margin:2px 5px 0 5px;}
+margin:2px 5px 0 5px;background-color:#fff;}
 .invoice-view{display:inline-block;width:150px;height:40px;line-height:40px;border:1px solid #F9A603;color:#F9A603;font-size:20px;
-margin:2px 5px 0 5px;cursor:pointer;}
+margin:2px 5px 0 5px;cursor:pointer;background-color:#fff;}
 .invoice-view:hover{color:#FFF;background-color:#F9A603;}
 
 @media(max-width:600px){
