@@ -111,11 +111,17 @@ function getActiveView(){
             $.each(json.data, function (i, o) {
                 var voucher = "<div class='active-voucher' >";
                 var voucherTitle = o.voucherName + " - " + o.dealName;
+                var redeemed = o.redeemed;
 
                 voucher += "<div class='voucher-title' >" + voucherTitle + "</div>";
                 voucher += "<div class='voucher-expires' >VOUCHER EXPIRES<br />" + o.endDate + "</div>";
                 voucher += "<div class='voucher-count' >" + o.voucherCount + " LEFT<br /><br /></div>";
-                voucher += "<div class='voucher-deactivate' id='" + o.id + "' >END VOUCHER</div>";
+                if(redeemed > 0){
+                    voucher += "<div class='voucher-deactivate-not' id='" + o.id + "' >REDEEMED</div>";
+                } else {
+                    voucher += "<div class='voucher-deactivate' id='" + o.id + "' >END VOUCHER</div>";
+                }
+
                 voucher += "</div>";
                 vdView.append(voucher);
             });
