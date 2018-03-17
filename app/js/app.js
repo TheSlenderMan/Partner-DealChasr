@@ -393,8 +393,7 @@ function getVenueDetails(){
 
 				venueView.css("background-image", "url(" + window.venueHeader + ")");
 				venueView.html(window.venueName.toUpperCase() + "<br />" + 
-				activeDisplay + 
-				"<input type='button' class='logout-button' value='LOG OUT' />");
+				activeDisplay);
 				
 				var action = $("#action-container");
 				action.html("<div class='loading' >LOADING</div>");

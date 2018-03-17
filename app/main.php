@@ -71,6 +71,7 @@ if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
                 <div class="main-link" id="active_deal" >ACTIVE DEALS &amp; VOUCHERS</div>
                 <div class="main-link" id="stats" >STATISTICS/INVOICES</div>
                 <div class="main-link" id="venue_details" >ACCOUNT</div>
+                <div class="main-link" id="logout" class="logout-button" >LOG OUT</div>
             </div>
             <div id="venue-message" >
 
