@@ -138,7 +138,10 @@ $(document).ready(function(){
         } else if($("#voucherCount").val() == ""){
             modalText.html("PLEASE ENTER A VOUCHER COUNT<br /><br />" +
                 "<input type='button' class='close-modal' value='CLOSE' />");
-        } else if($("#voucherDesc").val() == ""){
+        } else if(isNaN($("#voucherCount").val())){
+			modalText.html("VOUCHER COUNT MUST BE A NUMBER<br /><br />" +
+                "<input type='button' class='close-modal' value='CLOSE' />");
+		} else if($("#voucherDesc").val() == ""){
             modalText.html("PLEASE ENTER A VOUCHER DESCRIPTION<br /><br />" +
                 "<input type='button' class='close-modal' value='CLOSE' />");
         } else if($("#endDate").val() == ""){

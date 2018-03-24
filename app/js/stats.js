@@ -65,11 +65,12 @@ function getInvoice(id){
 					subAmount  = 0.00;
 				} else {
 					tierString = "PREMIUM ACCOUNT";
-					subAmount = 5.99;
+					subAmount = 14.99;
 				}
 				
 				var paymentsTotal = 0;
 				var paymentItems = "";
+				var freeAmount = 0;
 				
 				if(payments.length > 0){
 					$.each(payments, function(i, o){
@@ -85,16 +86,29 @@ function getInvoice(id){
 						   paymentsTotal = parseFloat(paymentsTotal) + parseFloat(o.grossPaid);
 					});
 				}
+				
+				if(vtier == 3){
+					if(iredemptions <= 50 ){
+						freeAmount = (parseFloat(iredemptions) * parseFloat(0.50));
+						paymentItems += "<br /><br /><br />" +
+							   "<div class='invoice-item-name' >" +
+							   "" + "50 Free Vouchers" + 
+							   "</div>" + 
+							   "<div class='invoice-item-amount' >" + 
+							   "&pound;" + freeAmount.toFixed(2) + " - " +
+							   "</div>";
+					}
+				}
 
 				if(promo == '1'){
 					var total = 0.00;
-					var t = (parseFloat(iamount) + parseFloat(subAmount)) - paymentsTotal;
+					var t = ((parseFloat(iamount) + parseFloat(subAmount)) - paymentsTotal) - freeAmount;
 					paymentItems += "<br /><br /><br />" +
 						"<div class='invoice-item-name' >" +
 						"" + "Introduction Promo" +
 						"</div>" +
 						"<div class='invoice-item-amount' >" +
-						"&pound;" + t + " - " +
+						"&pound;" + t.toFixed(2) + " - " +
 						"</div>";
 				} else {
 					var total = (parseFloat(iamount) + parseFloat(subAmount)) - paymentsTotal;

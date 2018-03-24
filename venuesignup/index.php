@@ -2,7 +2,7 @@
 if(isset($_GET['tier'])){
     $tier = $_GET['tier'];
 } else {
-    $tier = 1;
+    $tier = 2;
 }
 if(isset($_GET['error'])){
 	$e = $_GET['error'];
@@ -20,6 +20,9 @@ if(isset($_GET['error'])){
 	}
 	if($e == 'emailgeneral'){
 		$error = 'THERE SEEMS TO BE A PROBLEM WITH YOUR EMAIL ADDRESS. PLEASE TRY AGAIN.';
+	}
+	if($e == 'venueerror'){
+		$error = 'THERE SEEMS TO BE A PROBLEM AT THE MOMENT. PLEASE TRY AGAIN LATER.';
 	}
 } else {
 	$error = '';
