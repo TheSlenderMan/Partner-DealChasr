@@ -122,81 +122,7 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".voucher-submit-button", function(){
-        var modal = $("#modal-cover");
-        var modalText = $(".modal-message");
-
-        modalText.html("CREATING VOUCHER...");
-
-        modal.show();
-
-        if(window.dealType == ""){
-            modalText.html("NO VOUCHER TYPE WAS SELECTED<br /><br />" +
-                "<input type='button' class='close-modal' value='CLOSE' />");
-        } else if(window.voucherType == ""){
-            modalText.html("NO OFFER WAS SELECTED<br /><br />" +
-                "<input type='button' class='close-modal' value='CLOSE' />");
-        } else if($("#voucherCount").val() == ""){
-            modalText.html("PLEASE ENTER A VOUCHER COUNT<br /><br />" +
-                "<input type='button' class='close-modal' value='CLOSE' />");
-        } else if(isNaN($("#voucherCount").val())){
-			modalText.html("VOUCHER COUNT MUST BE A NUMBER<br /><br />" +
-                "<input type='button' class='close-modal' value='CLOSE' />");
-		} else if($("#voucherDesc").val() == ""){
-            modalText.html("PLEASE ENTER A VOUCHER DESCRIPTION<br /><br />" +
-                "<input type='button' class='close-modal' value='CLOSE' />");
-        } else if($("#endDate").val() == ""){
-            modalText.html("PLEASE SELECT A VOUCHER END TIME<br /><br />" +
-                "<input type='button' class='close-modal' value='CLOSE' />");
-        } else {
-            $.ajax({
-               url: "http://api.almanacmedia.co.uk/vouchers/create",
-                type: "POST",
-                dataType: "JSON",
-                data: {
-                    "userID": window.uid,
-                    "venueID": window.venueID,
-                    "dealID": window.dealType,
-                    "voucherID": window.voucherType,
-                    "voucherCount": $("#voucherCount").val(),
-                    "voucherDescription": $("#voucherDesc").val(),
-                    "voucherTime": $("#endDate").val()
-                },
-                headers: {
-                    "Authorization": "DS1k1Il68_uPPoD"
-                },
-                success: function(json){
-                    console.log(json);
-                    if(json.data.created == 1){
-                        modalText.html("YOUR VOUCHER HAS BEEN CREATED!<br /><br />Those with the public app can now redeem your voucher." +
-                            "<br /><br />" +
-                            "<input type='button' class='close-modal' value='CLOSE' />");
-						if(window.venueVouchersRemaining != 'unlimited'){
-							window.venueVouchersRemaining = window.venueVouchersRemaining - parseInt($("#voucherCount").val());
-							window.venueVouchersUsed = window.venueVouchersUsed + parseInt($("#voucherCount").val());
-						} else {
-							window.venueVouchersUsed = window.venueVouchersUsed + parseInt($("#voucherCount").val());
-						}
-						var venueView = $("#venue-message");							
-							
-						venueView.html(window.venueName.toUpperCase() + "<br />" + 
-						"<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
-						"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />" + 
-						"<input type='button' class='logout-button' value='LOG OUT' />");
-                        window.created = 1;
-					} else if(json.data.created == 0){
-						modalText.html(json.data.message + "<br /><br />" + 
-						"<input type='button' class='close-modal' value='CLOSE' />");
-					} else {
-						modalText.html("SOMETHING WENT WRONG<br /><br />If you keep experiencing this problem please report it to " +
-						"theteam@dealchasr.co.uk<br /><br />" + 
-						"<input type='button' class='close-modal' value='CLOSE' />");
-					}
-                },
-                error: function(e){
-
-                }
-            });
-        }
+       createVoucher();
     });
 
     $(document).on("click", ".close-modal", function(){
@@ -239,6 +165,22 @@ $(document).ready(function(){
 });
 
 function resendEmail(th){
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, function(){resendEmail(th);});
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
     $.ajax({
         url: 'http://api.almanacmedia.co.uk/venues/resendvalidation',
         type: 'POST',
@@ -248,10 +190,19 @@ function resendEmail(th){
             "vid": window.venueID
         },
         headers: {
-            "Authorization": "DS1k1Il68_uPPoD"
+            "Authorization": "DS1k1Il68_uPPoD:" + client,
+			"DSToken": token,
+			"DSUid": uuid,
+			"DSUtoken" : utoken
         },
         success: function(json){
-            th.html("EMAIL SENT");
+			if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+				refreshToken(refresh, client, function(){resendEmail(th);});
+			} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+				window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
+			} else {
+				th.html("EMAIL SENT");
+			}
         },
         error: function(e){
             console.log(e);
@@ -341,6 +292,22 @@ function getAddVoucherView(){
 }
 
 function getVenueDetails(){
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, getVenueDetails);
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
 	var action = $("#action-container");
     action.show();
 	$("#master-container").css("opacity", "0.5");
@@ -349,81 +316,192 @@ function getVenueDetails(){
 		type: "GET",
 		dataType: "JSON",
 		headers: {
-			"Authorization": "DS1k1Il68_uPPoD"
+			"Authorization": "DS1k1Il68_uPPoD:" + client,
+			"DSToken": token,
+			"DSUid": uuid,
+			"DSUtoken" : utoken
 		},
 		success: function(json){
-			if(json.data.found == 1){
-				var venue = json.data.venues;
-				var venueView = $("#venue-message");
-
-				window.venueID = venue.id;
-				window.venueName = venue.vName;
-				window.venueHeader = venue.vHeader;
-				window.venueDesc   = venue.vDescription;
-				window.venueWebsite = venue.vWebsite;
-				window.venueOpenHours = venue.vOpenHours;
-				window.venueContact = venue.vContact;
-				window.venueEmail = venue.vEmail;
-				window.venueAddressOne = venue.vAddressOne;
-				window.venueAddressTwo = venue.vAddressTwo;
-				window.venueCityTown = venue.vCityTown;
-				window.venueCounty = venue.vCounty;
-				window.venueCountry = venue.vCountry;
-				window.venuePostCode = venue.vPostCode;
-				window.venueVouchersRemaining = venue.totalRemaining;
-				window.venueVouchersUsed = venue.totalUsed;
-				window.outOf50 = '';
-				window.accountActive = venue.active;
-				window.tier = venue.tier;
-				window.validated = venue.validated;
-				
-				var activeDisplay = "";
-				
-				if(window.venueVouchersRemaining != 'unlimited'){
-					window.outOf50 = '/50';
-					$("#add_deal").css("opacity", "0.5");
-				}
-				if(window.accountActive == 0){
-					$("#add_voucher").css("opacity", "0.5");
-					$("#add_deal").css("opacity", "0.5");
-					$("#active_deal").css("opacity", "0.5");
-					$("#venue_details").css("opacity", "0.5");
-					activeDisplay = "<span style='font-size:14px;' >ACCOUNT INACTIVE/SUSPENDED</span><br />";
-				} else {
-					activeDisplay = "<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
-									"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />";
-				}
-
-				venueView.css("background-image", "url(" + window.venueHeader + ")");
-				venueView.html(window.venueName.toUpperCase() + "<br />" + 
-				activeDisplay);
-				
-				var action = $("#action-container");
-				action.html("<div class='loading' >LOADING</div>");
-				setTimeout(function(){
-					action.hide();
-					$("#master-container").css("opacity", "1");
-					window.created = 0;
-					if(window.validated == 0){
-						var modal = $("#modal-cover");
-						var modalText = $(".modal-message");
-
-						modalText.html("YOUR EMAIL ADDRESS HAS NOT BEEN VALIDATED<br /><br />Until you validate your email address" +
-							" your venue and vouchers will be available on the public app.<br /><br />" +
-							"<input type='button' class='close-modal-centered' value='DISMISS' />" +
-							"<br /><br />You didn't get an email? Click below to resend.<br />" +
-							"Alternatively you can do this on the account tab.<br /><br />" +
-							"<div class='resend-email' >RESEND EMAIL</div>");
-
-						modal.show();
-					}
-				}, 1000);
+			if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+				refreshToken(refresh, client, getVenueDetails)
+			} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+				window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
 			} else {
-				console.log(json.data.venues);
-				$("#venue-message").val("NO VENUE SET UP YET!");
+				if(json.data.found == 1){
+					var venue = json.data.venues;
+					var venueView = $("#venue-message");
+
+					window.venueID = venue.id;
+					window.venueName = venue.vName;
+					window.venueHeader = venue.vHeader;
+					window.venueDesc   = venue.vDescription;
+					window.venueWebsite = venue.vWebsite;
+					window.venueOpenHours = venue.vOpenHours;
+					window.venueContact = venue.vContact;
+					window.venueEmail = venue.vEmail;
+					window.venueAddressOne = venue.vAddressOne;
+					window.venueAddressTwo = venue.vAddressTwo;
+					window.venueCityTown = venue.vCityTown;
+					window.venueCounty = venue.vCounty;
+					window.venueCountry = venue.vCountry;
+					window.venuePostCode = venue.vPostCode;
+					window.venueVouchersRemaining = venue.totalRemaining;
+					window.venueVouchersUsed = venue.totalUsed;
+					window.outOf50 = '';
+					window.accountActive = venue.active;
+					window.tier = venue.tier;
+					window.validated = venue.validated;
+					
+					var activeDisplay = "";
+					
+					if(window.venueVouchersRemaining != 'unlimited'){
+						window.outOf50 = '/50';
+						$("#add_deal").css("opacity", "0.5");
+					}
+					if(window.accountActive == 0){
+						$("#add_voucher").css("opacity", "0.5");
+						$("#add_deal").css("opacity", "0.5");
+						$("#active_deal").css("opacity", "0.5");
+						$("#venue_details").css("opacity", "0.5");
+						activeDisplay = "<span style='font-size:14px;' >ACCOUNT INACTIVE/SUSPENDED</span><br />";
+					} else {
+						activeDisplay = "<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
+										"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />";
+					}
+
+					venueView.css("background-image", "url(" + window.venueHeader + ")");
+					venueView.html(window.venueName.toUpperCase() + "<br />" + 
+					activeDisplay);
+					
+					var action = $("#action-container");
+					action.html("<div class='loading' >LOADING</div>");
+					setTimeout(function(){
+						action.hide();
+						$("#master-container").css("opacity", "1");
+						window.created = 0;
+						if(window.validated == 0){
+							var modal = $("#modal-cover");
+							var modalText = $(".modal-message");
+
+							modalText.html("YOUR EMAIL ADDRESS HAS NOT BEEN VALIDATED<br /><br />Until you validate your email address" +
+								" your venue and vouchers will be available on the public app.<br /><br />" +
+								"<input type='button' class='close-modal-centered' value='DISMISS' />" +
+								"<br /><br />You didn't get an email? Click below to resend.<br />" +
+								"Alternatively you can do this on the account tab.<br /><br />" +
+								"<div class='resend-email' >RESEND EMAIL</div>");
+
+							modal.show();
+						}
+					}, 1000);
+				} else {
+					console.log(json.data.venues);
+					$("#venue-message").val("NO VENUE SET UP YET!");
+				}
 			}
 		}, error: function(e){
 			console.log(e);
 		}
 	});
+}
+
+function createVoucher(){
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, createVoucher);
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
+	var modal = $("#modal-cover");
+	var modalText = $(".modal-message");
+
+	modalText.html("CREATING VOUCHER...");
+
+	modal.show();
+
+	if(window.dealType == ""){
+		modalText.html("NO VOUCHER TYPE WAS SELECTED<br /><br />" +
+			"<input type='button' class='close-modal' value='CLOSE' />");
+	} else if(window.voucherType == ""){
+		modalText.html("NO OFFER WAS SELECTED<br /><br />" +
+			"<input type='button' class='close-modal' value='CLOSE' />");
+	} else if($("#voucherCount").val() == ""){
+		modalText.html("PLEASE ENTER A VOUCHER COUNT<br /><br />" +
+			"<input type='button' class='close-modal' value='CLOSE' />");
+	} else if(isNaN($("#voucherCount").val())){
+		modalText.html("VOUCHER COUNT MUST BE A NUMBER<br /><br />" +
+			"<input type='button' class='close-modal' value='CLOSE' />");
+	} else if($("#voucherDesc").val() == ""){
+		modalText.html("PLEASE ENTER A VOUCHER DESCRIPTION<br /><br />" +
+			"<input type='button' class='close-modal' value='CLOSE' />");
+	} else if($("#endDate").val() == ""){
+		modalText.html("PLEASE SELECT A VOUCHER END TIME<br /><br />" +
+			"<input type='button' class='close-modal' value='CLOSE' />");
+	} else {
+		$.ajax({
+		   url: "http://api.almanacmedia.co.uk/vouchers/create",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				"userID": window.uid,
+				"venueID": window.venueID,
+				"dealID": window.dealType,
+				"voucherID": window.voucherType,
+				"voucherCount": $("#voucherCount").val(),
+				"voucherDescription": $("#voucherDesc").val(),
+				"voucherTime": $("#endDate").val()
+			},
+			headers: {
+				"Authorization": "DS1k1Il68_uPPoD:" + client,
+				"DSToken": token,
+				"DSUid": uuid,
+				"DSUtoken" : utoken
+			},
+			success: function(json){
+				if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+					refreshToken(refresh, client, createVoucher);
+				} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+					window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
+				} else {
+					if(json.data.created == 1){
+						modalText.html("YOUR VOUCHER HAS BEEN CREATED!<br /><br />Those with the public app can now redeem your voucher." +
+							"<br /><br />" +
+							"<input type='button' class='close-modal' value='CLOSE' />");
+						if(window.venueVouchersRemaining != 'unlimited'){
+							window.venueVouchersRemaining = window.venueVouchersRemaining - parseInt($("#voucherCount").val());
+							window.venueVouchersUsed = window.venueVouchersUsed + parseInt($("#voucherCount").val());
+						} else {
+							window.venueVouchersUsed = window.venueVouchersUsed + parseInt($("#voucherCount").val());
+						}
+						var venueView = $("#venue-message");							
+							
+						venueView.html(window.venueName.toUpperCase() + "<br />" + 
+						"<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
+						"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />" + 
+						"<input type='button' class='logout-button' value='LOG OUT' />");
+						window.created = 1;
+					} else if(json.data.created == 0){
+						modalText.html(json.data.message + "<br /><br />" + 
+						"<input type='button' class='close-modal' value='CLOSE' />");
+					} else {
+						modalText.html("SOMETHING WENT WRONG<br /><br />If you keep experiencing this problem please report it to " +
+						"theteam@dealchasr.co.uk<br /><br />" + 
+						"<input type='button' class='close-modal' value='CLOSE' />");
+					}
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+	}
 }

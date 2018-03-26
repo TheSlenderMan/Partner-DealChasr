@@ -28,71 +28,11 @@ $(document).ready(function(){
     });
 
     $(document).on("change", "#inputfile",function(){
-        var modal = $("#modal-cover");
-        var modalText = $(".modal-message");
-        modal.show();
-
-        modalText.html("UPLOADING PHOTO...<br /><br />");
-
-        var file_data = $('#inputfile').prop('files')[0];
-        var form_data = new FormData();
-        form_data.append('venueheader', file_data);
-
-        var fixedName = window.venueName.replace(/[^A-Z0-9]/ig, "_");
-
-        $.ajax({
-            url: "http://api.almanacmedia.co.uk/venues/details?id=" + window.venueID + "&venueName=" + fixedName,
-            type: "POST",
-            dataType: "JSON",
-            data:  form_data,
-            headers: {
-                "Authorization": "DS1k1Il68_uPPoD"
-            },
-            contentType: false,
-            cache: false,
-            processData:false,
-            success: function(data){
-                console.log(data.updated);
-                var venueView = $("#venue-message");
-                venueView.css("background-image", "url(" + data.updated + ")");
-                $(".venue-details-title").css("background-image", "url(" + data.updated + ")");
-                window.venueHeader = data.updated;
-                modal.hide();
-            }
-        });
+        uploadFile();
     });
 	
 	$(document).on("click", ".p-upgrade-btn", function(){
-		var th = $(this);
-		var newTier = th.attr('id');
-		th.html("UPDATING ACCOUNT...");
-		if(confirm("Are you sure you want to upgrade/downgrade your account?")){
-			$.ajax({
-				url: 'http://api.almanacmedia.co.uk/venues/upgrade',
-				type: 'POST',
-				dataType: 'JSON',
-				data:{
-					"venueID": window.venueID,
-					"oldTier": window.tier,
-					"newTier": newTier,
-					"email": window.venueEmail
-				},
-				headers:{
-					"Authorization": "DS1k1Il68_uPPoD"
-				},
-				success: function(json){
-					if(json.upgraded == 1){
-						th.html("ACCOUNT UPGRADED... ");
-						setTimeout(function(){
-							window.location.href = "http://my.dealchasr.co.uk?upgraded=true";
-						}, 2500);
-					}
-				},
-				error: function(e){
-					console.log(e);
-				}
-			});
-		}
+		upgradeAccount($(this));
 	});
 	
 	$(document).on("click", "#upgrade-account", function(){
@@ -264,6 +204,22 @@ function getDetailsView(){
 }
 
 function changeAccountStatus(state, id){
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, function(){changeAccountStatus(state, id);});
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
 	var modal = $("#modal-cover");
     var modalText = $(".modal-message");
     modalText.html("CLOSING ACCOUNT...<br /><br />");
@@ -273,17 +229,26 @@ function changeAccountStatus(state, id){
 		type: "POST",
 		dataType: "JSON",
 		headers: {
-			"Authorization": "DS1k1Il68_uPPoD"
+			"Authorization": "DS1k1Il68_uPPoD:" + client,
+			"DSToken": token,
+			"DSUid": uuid,
+			"DSUtoken" : utoken
 		},
 		data: {
 			"state": state,
 			"id": id
 		},
 		success: function(json){
-			if(json.changed == 1){
-				window.location.href = "logout.php";
+			if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+				refreshToken(refresh, client, function(){changeAccountStatus(state, id)});
+			} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+				window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
 			} else {
-				console.log(e);
+				if(json.changed == 1){
+					window.location.href = "logout.php";
+				} else {
+					console.log(e);
+				}
 			}
 		},
 		error: function(e){
@@ -293,6 +258,22 @@ function changeAccountStatus(state, id){
 }
 
 function submitDetails(){
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, submitDetails);
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
     var modal = $("#modal-cover");
     var modalText = $(".modal-message");
     modalText.html("UPDATING VENUE DETAILS...<br /><br />");
@@ -343,7 +324,10 @@ function submitDetails(){
             type: "POST",
             dataType: "JSON",
             headers: {
-                "Authorization": "DS1k1Il68_uPPoD"
+                "Authorization": "DS1k1Il68_uPPoD:" + client,
+				"DSToken": token,
+				"DSUid": uuid,
+				"DSUtoken" : utoken
             },
             data: {
                 "vDescription": venueDescription,
@@ -359,13 +343,19 @@ function submitDetails(){
                 "vAddressPostCode": venueAddressPostCode
             },
             success: function(json){
-                if(json.updated == 1){
-                    modalText.html("VENUE DETAILS WERE UPDATED SUCCESSFULLY<br /><br />" +
-                        "<input type='button' class='close-modal-done' value='CLOSE' />");
-                } else {
-                    modalText.html("WHOA! SOMETHING WENT WRONG. PLEASE TRY AGAIN.<br /><br />" +
-                        "<input type='button' class='close-modal-centered' value='CLOSE' />");
-                }
+				if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+					refreshToken(refresh, client, submitDetails);
+				} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+					window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
+				} else {
+					if(json.updated == 1){
+						modalText.html("VENUE DETAILS WERE UPDATED SUCCESSFULLY<br /><br />" +
+							"<input type='button' class='close-modal-done' value='CLOSE' />");
+					} else {
+						modalText.html("WHOA! SOMETHING WENT WRONG. PLEASE TRY AGAIN.<br /><br />" +
+							"<input type='button' class='close-modal-centered' value='CLOSE' />");
+					}
+				}
             },
             error: function(e){
                 modalText.html("WHOA! SOMETHING WENT WRONG. PLEASE TRY AGAIN.<br /><br />" +
@@ -375,23 +365,127 @@ function submitDetails(){
     }
 }
 
-function uploadImage() {
-    var modal = $("#modal-cover");
-    var modalText = $(".modal-message");
-    modal.show();
-    if(typeof Android !== "undefined" && Android !== null) {
-        modalText.html("UPLOADING PHOTO...<br /><br />");
-        console.log(window.venueID);
-        Android.uploadImage(window.venueName, window.venueID);
-    } else {
-
-    }
-}
-
 function closeDetailsModal(url){
     var venueView = $("#venue-message");
     venueView.css("background-image", "url(" + url + ")");
     $(".venue-details-title").css("background-image", "url(" + url + ")");
     window.venueHeader = url;
     $("#modal-cover").hide();
+}
+
+function uploadFile() {
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, uploadFile);
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
+	var modal = $("#modal-cover");
+	var modalText = $(".modal-message");
+	modal.show();
+
+	modalText.html("UPLOADING PHOTO...<br /><br />");
+
+	var file_data = $('#inputfile').prop('files')[0];
+	var form_data = new FormData();
+	form_data.append('venueheader', file_data);
+
+	var fixedName = window.venueName.replace(/[^A-Z0-9]/ig, "_");
+
+	$.ajax({
+		url: "http://api.almanacmedia.co.uk/venues/details?id=" + window.venueID + "&venueName=" + fixedName,
+		type: "POST",
+		dataType: "JSON",
+		data:  form_data,
+		headers: {
+			"Authorization": "DS1k1Il68_uPPoD:" + client,
+			"DSToken": token,
+			"DSUid": uuid,
+			"DSUtoken" : utoken
+		},
+		contentType: false,
+		cache: false,
+		processData:false,
+		success: function(data){
+			if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+				refreshToken(refresh, client, uploadFile);
+			} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+				window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
+			} else {
+				console.log(data.updated);
+				var venueView = $("#venue-message");
+				venueView.css("background-image", "url(" + data.updated + ")");
+				$(".venue-details-title").css("background-image", "url(" + data.updated + ")");
+				window.venueHeader = data.updated;
+				modal.hide();
+			}
+		}
+	});
+}
+
+function upgradeAccount(th){
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, function(){upgradeAccount(th);});
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
+	var newTier = th.attr('id');
+	th.html("UPDATING ACCOUNT...");
+	if(confirm("Are you sure you want to upgrade/downgrade your account?")){
+		$.ajax({
+			url: 'http://api.almanacmedia.co.uk/venues/upgrade',
+			type: 'POST',
+			dataType: 'JSON',
+			data:{
+				"venueID": window.venueID,
+				"oldTier": window.tier,
+				"newTier": newTier,
+				"email": window.venueEmail
+			},
+			headers:{
+				"Authorization": "DS1k1Il68_uPPoD:" + client,
+				"DSToken": token,
+				"DSUid": uuid,
+				"DSUtoken" : utoken
+			},
+			success: function(json){
+				if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+					refreshToken(refresh, client, function(){upgradeAccount(th);});
+				} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+					window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
+				} else {
+					if(json.upgraded == 1){
+						th.html("ACCOUNT UPGRADED... ");
+						setTimeout(function(){
+							window.location.href = "http://my.dealchasr.co.uk?upgraded=true";
+						}, 2500);
+					}
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+	}
 }

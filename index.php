@@ -46,7 +46,8 @@ if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
         <meta name="theme-color" content="#ffffff">
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" ></script>
-        <script src="http://my.dealchasr.co.uk/js/login.js" type="text/javascript" ></script>
+        <script src="http://my.dealchasr.co.uk/js/tokens.js" type="text/javascript" ></script>
+		<script src="http://my.dealchasr.co.uk/js/login.js" type="text/javascript" ></script>
 		
 		<script>
 		var isMobile = {

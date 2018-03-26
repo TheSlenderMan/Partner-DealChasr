@@ -29,7 +29,10 @@ if(isset($_POST['fullName']) && isset($_POST['vTier'])){
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $upost);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Authorization: DS1k1Il68_uPPoD'
+    'Authorization: DS1k1Il68_uPPoD:2',
+	'DSToken: GAIN',
+	'DSUid: LOGIN',
+	'DSUToken: TOKEN'
     ));
 	$user_output = curl_exec ($ch);
 	$user_res = json_decode($user_output, true);
@@ -50,7 +53,10 @@ if(isset($_POST['fullName']) && isset($_POST['vTier'])){
 			curl_setopt($cs, CURLOPT_POSTFIELDS, $post);
 			curl_setopt($cs, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($cs, CURLOPT_HTTPHEADER, array(
-			'Authorization: DS1k1Il68_uPPoD'
+			'Authorization: DS1k1Il68_uPPoD:2',
+			'DSToken: GAIN',
+			'DSUid: LOGIN',
+			'DSUToken: TOKEN'
 			));
 			$ven_output = curl_exec ($cs);
 			$ven_res = json_decode($ven_output, true);

@@ -42,77 +42,7 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".deal-submit-button", function(){
-        var modal = $("#modal-cover");
-        var modalText = $(".modal-message");
-
-        modalText.html("CREATING DEAL...");
-
-        modal.show();
-
-        var rec = 0;
-        var daily = 0;
-
-        if($("#recurring").prop('checked')){
-            rec = 1;
-        }
-
-        if($("#daily").prop('checked')){
-            daily = 1;
-        }
-
-        if(window.dealType == ""){
-            modalText.html("NO VOUCHER TYPE WAS SELECTED<br /><br />" +
-                "<input type='button' class='close-modal-centered' value='CLOSE' />");
-        } else if($("#dealTitle").val() == ""){
-            modalText.html("PLEASE ENTER A DEAL TITLE<br /><br />" +
-                "<input type='button' class='close-modal-centered' value='CLOSE' />");
-        } else if($("#dealDesc").val() == ""){
-            modalText.html("PLEASE ENTER A DESCRIPTION<br /><br />" +
-                "<input type='button' class='close-modal-centered' value='CLOSE' />");
-        } else if($("#dealDate").val() == ""){
-            modalText.html("PLEASE SELECT A START DATE<br /><br />" +
-                "<input type='button' class='close-modal-centered' value='CLOSE' />");
-        } else if($("#dealTime").val() == ""){
-            modalText.html("PLEASE SELECT A START TIME<br /><br />" +
-                "<input type='button' class='close-modal-centered' value='CLOSE' />");
-        } else {
-            $.ajax({
-                url: "http://api.almanacmedia.co.uk/deals/create",
-                type: "POST",
-                dataType: "JSON",
-                data: {
-                    "userID": window.uid,
-                    "venueID": window.venueID,
-                    "dealID": window.dealType,
-                    "dealTitle": $("#dealTitle").val(),
-                    "dealDescription": $("#dealDesc").val(),
-                    "dealTime": $("#dealTime").val(),
-                    "dealDate": $("#dealDate").val(),
-                    "recurring": rec,
-                    "daily": daily
-                },
-                headers: {
-                    "Authorization": "DS1k1Il68_uPPoD"
-                },
-                success: function(json){
-                    console.log(json);
-                    if(json.data.created == 1){
-                        modalText.html("YOUR DEAL HAS BEEN CREATED!<br /><br />Those with the public app can now view your deal." +
-                            "<br /><br />" +
-                            "<input type='button' class='close-modal-done' value='CLOSE' />");
-                    } else {
-                        modalText.html("ERROR CREATING DEAL. PLEASE TRY AGAIN" +
-                            "<br /><br />" +
-                            "<input type='button' class='close-modal-centered' value='CLOSE' />");
-                    }
-                },
-                error: function(e){
-                    modalText.html("ERROR CREATING DEAL. PLEASE TRY AGAIN" +
-                        "<br /><br />" +
-                        "<input type='button' class='close-modal-centered' value='CLOSE' />");
-                }
-            });
-        }
+        createDeal();
     });
 });
 
@@ -140,4 +70,102 @@ function getAddDealView(){
     dealView += "</div>";
 
     action.html(dealView);
+}
+
+function createDeal(){
+	if(!getCookie("DSAT")){
+		var ts = getToken(2, createDeal());
+		return false;
+	} else {
+		var token = getCookie("DSAT");
+		var refresh = getCookie("DSRT");
+		var client = getCookie("DSCL");
+	}
+	
+	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
+		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
+	} else {
+		var utoken = getCookie("DSUTOKEN");
+		var uuid = getCookie("DSUID");
+	}
+	
+	var modal = $("#modal-cover");
+	var modalText = $(".modal-message");
+
+	modalText.html("CREATING DEAL...");
+
+	modal.show();
+
+	var rec = 0;
+	var daily = 0;
+
+	if($("#recurring").prop('checked')){
+		rec = 1;
+	}
+
+	if($("#daily").prop('checked')){
+		daily = 1;
+	}
+
+	if(window.dealType == ""){
+		modalText.html("NO VOUCHER TYPE WAS SELECTED<br /><br />" +
+			"<input type='button' class='close-modal-centered' value='CLOSE' />");
+	} else if($("#dealTitle").val() == ""){
+		modalText.html("PLEASE ENTER A DEAL TITLE<br /><br />" +
+			"<input type='button' class='close-modal-centered' value='CLOSE' />");
+	} else if($("#dealDesc").val() == ""){
+		modalText.html("PLEASE ENTER A DESCRIPTION<br /><br />" +
+			"<input type='button' class='close-modal-centered' value='CLOSE' />");
+	} else if($("#dealDate").val() == ""){
+		modalText.html("PLEASE SELECT A START DATE<br /><br />" +
+			"<input type='button' class='close-modal-centered' value='CLOSE' />");
+	} else if($("#dealTime").val() == ""){
+		modalText.html("PLEASE SELECT A START TIME<br /><br />" +
+			"<input type='button' class='close-modal-centered' value='CLOSE' />");
+	} else {
+		$.ajax({
+			url: "http://api.almanacmedia.co.uk/deals/create",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				"userID": window.uid,
+				"venueID": window.venueID,
+				"dealID": window.dealType,
+				"dealTitle": $("#dealTitle").val(),
+				"dealDescription": $("#dealDesc").val(),
+				"dealTime": $("#dealTime").val(),
+				"dealDate": $("#dealDate").val(),
+				"recurring": rec,
+				"daily": daily
+			},
+			headers: {
+				"Authorization": "DS1k1Il68_uPPoD:" + client,
+				"DSToken": token,
+				"DSUid": uuid,
+				"DSUtoken" : utoken
+			},
+			success: function(json){
+				if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+					refreshToken(refresh, client, createDeal);
+				} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+					window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
+				} else {
+					if(json.data.created == 1){
+						modalText.html("YOUR DEAL HAS BEEN CREATED!<br /><br />Those with the public app can now view your deal." +
+							"<br /><br />" +
+							"<input type='button' class='close-modal-done' value='CLOSE' />");
+					} else {
+						modalText.html("ERROR CREATING DEAL. PLEASE TRY AGAIN" +
+							"<br /><br />" +
+							"<input type='button' class='close-modal-centered' value='CLOSE' />");
+					}
+				}
+			},
+			error: function(e){
+				modalText.html("ERROR CREATING DEAL. PLEASE TRY AGAIN" +
+					"<br /><br />" +
+					"<input type='button' class='close-modal-centered' value='CLOSE' />");
+			}
+		});
+	}
 }
