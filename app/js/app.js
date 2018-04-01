@@ -44,6 +44,14 @@ $(document).ready(function(){
 						$(".loading").html("DETAILS UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
 					}
 					break;
+				case "logout":
+					if(window.app == 1){
+						var add = "?app_location=1";
+					} else {
+						var add = "";
+					}
+					window.location.href = "http://my.dealchasr.co.uk/app/logout.php" + add;
+					break;
 				default:
 					if(window.accountActive == 1){
 						getAddVoucherView();
@@ -113,12 +121,7 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".logout-button", function(e){
-		if(window.app == 1){
-			var add = "?app_location=1";
-		} else {
-			var add = "";
-		}
-        window.location.href = "http://my.dealchasr.co.uk/app/logout.php" + add;
+
     });
 
     $(document).on("click", ".voucher-submit-button", function(){
@@ -153,6 +156,7 @@ $(document).ready(function(){
 			$("#master-container").css("opacity", "1");
 			$("#ui-datepicker-div").remove();
             window.created = 0;
+			getVenueDetails();
 		}, 1000);
       
     });
@@ -351,6 +355,7 @@ function getVenueDetails(){
 					window.accountActive = venue.active;
 					window.tier = venue.tier;
 					window.validated = venue.validated;
+					window.rEmail = venue.redemptionEmail;
 					
 					var activeDisplay = "";
 					

@@ -187,5 +187,9 @@ if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
 				</span>
             </div>
         </div>
+		<div id="cookie-popup" >
+			This Web App uses cookies to ensure you get the best experience. <a href="http://dealchasr.co.uk/privacy-policy" >Learn More</a>
+			<div class="dismiss-cookie" >Got it!</div>
+		</div>
     </body>
 </html>

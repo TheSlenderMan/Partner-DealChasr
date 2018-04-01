@@ -66,6 +66,14 @@ text-decoration: none;display:inline-block;cursor:pointer;}
 background-image: -ms-linear-gradient(top, #ffffff, #e0e0e0);background-image: -o-linear-gradient(top, #ffffff, #e0e0e0);background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
 text-decoration: none;}
 
+#cookie-popup{display:none;position:absolute;z-index:99999;bottom:10px;right:10px;width:90%;height:40px;background-color:#fff;line-height:40px;padding-left:10px;
+color:#f9a603;}
+#cookie-popup a:link{color:#f9a603;font-weight:bold;}
+#cookie-popup a:visited{color:#f9a603;font-weight:bold;}
+#cookie-popup a:hover{color:#f9a603;}
+.dismiss-cookie{float: right;width: 100px;height: 30px;margin-top: 5px;margin-right: 5px;text-align: center;font-weight: bold;
+line-height: 30px;background-color: #f9a603;color: #fff;cursor:pointer;}
+
 @media (max-width:800px){
 	#login-container{position:relative;top:10%;left:10vw;width:90vw;margin:0 0 0 -5vw;text-align:center;}
 	.welcome-screen{width:90%;left:2%;margin-left:0;}

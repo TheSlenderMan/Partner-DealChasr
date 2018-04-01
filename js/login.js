@@ -1,6 +1,9 @@
 $(document).ready(function(){
 	
 	getToken(2, null);
+	if(!getCookie("ds_cookie")){
+		$("#cookie-popup").show("fast");
+	}
 	
     $(document).on("focus", "#email", function(){
         var email = $(this);
@@ -34,7 +37,16 @@ $(document).ready(function(){
     $(document).on("click", "#login", function(){
 		login();
     });
+	
+	$(document).on("click", ".dismiss-cookie", function(){
+		removeCookieWarning();
+	});
 });
+
+function removeCookieWarning(){
+	createCookie("ds_cookie", "true", 100);
+	$("#cookie-popup").hide();
+}
 
 function login(){
 	if(!getCookie("DSAT")){

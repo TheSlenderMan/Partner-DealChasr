@@ -40,62 +40,26 @@ $(document).ready(function(){
         var modalText = $(".modal-message");
         modal.show();
 
-		if(window.tier == 1){
-			var p1 = 2;
-			var title1 = "PRO";
-			var html1 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
-						"<div class='p-divider' ></div><br /><br />" + 
-						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
-						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
-						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br /><br /><br />" + 
-						"<div class='p-upgrade-btn' id='2' >UPGRADE NOW</div>";
+		if(window.tier == 2){
 			var p2 = 3;
 			var title2 = "PREMIUM";
 			var html2 = "<h1>&pound;5.99</h1><br /><span class='p-dur' >Per month</span>" + 
 						"<div class='p-divider' ></div><br /><br />" + 
 						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
-						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
-						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br />" + 
-						"<span class='product-header' >Premium pin on map</span><span class='product-info' ></span><br /><br /><br /><br />" + 
-						"<div class='p-upgrade-btn' id='3' >UPGRADE NOW</div>";
-		} else if(window.tier == 2){
-			var p1 = 1;
-			var title1 = "FREE";
-			var html1 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
-						"<div class='p-divider' ></div><br /><br />" + 
-						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >50 (Reddemable)</span><br /><br />" + 
-						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >Free</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >When vouchers are available</span><br /><br /><br /><br />" + 
-						"<div class='p-upgrade-btn' id='1' >DOWNGRADE NOW</div>";
-			var p2 = 3;
-			var title2 = "PREMIUM";
-			var html2 = "<h1>&pound;5.99</h1><br /><span class='p-dur' >Per month</span>" + 
-						"<div class='p-divider' ></div><br /><br />" + 
-						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
-						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
+						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher (50 Free a month)</span><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Unlimited</span><br /><br />" + 
 						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br />" + 
 						"<span class='product-header' >Premium pin on map</span><span class='product-info' ></span><br /><br /><br /><br />" + 
 						"<div class='p-upgrade-btn' id='3' >UPGRADE NOW</div>";
 		} else {
-			var p1 = 1;
-			var title1 = "FREE";
-			var html1 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
-						"<div class='p-divider' ></div><br /><br />" + 
-						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >50 (Reddemable)</span><br /><br />" + 
-						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >Free</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >When vouchers are available</span><br /><br /><br /><br />" + 
-						"<div class='p-upgrade-btn' id='1' >DOWNGRADE NOW</div>";
 			var p2 = 2;
 			var title2 = "PRO";
 			var html2 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
 						"<div class='p-divider' ></div><br /><br />" + 
 						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
 						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Yes</span><br /><br />" + 
-						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br /><br /><br />" + 
+						"<span class='product-header' >Deals and Events - </span><span class='product-info' >1</span><br /><br />" + 
+						"<span class='product-header' >Your location on the map - </span><span class='product-info' >When vouchers are available</span><br /><br /><br /><br />" + 
 						"<div class='p-upgrade-btn' id='2' >DOWNGRADE NOW</div>";
 		}
 		
@@ -105,9 +69,6 @@ $(document).ready(function(){
 						  " next invoice will be chargeable.<br /><br /><br />";
 		
 		upgradeHTML += "<div class='upgrade-container' >" + 
-					   "<div class='product-1' >" + 
-					   "<span class='p-title' >" + title1 + "</span><br /><br />" + 
-					   html1 + "</div><br /><br />" +
 					   "<div class='product-2' >" + 
 					   "<span class='p-title' >" + title2 + "</span><br /><br />" + 
 					   html2 + "</div></div><br /><br />";
@@ -171,6 +132,19 @@ function getDetailsView(){
         "<br /><br /><label>POST CODE</label>" +
         "<input type='text' class='text-one' name='venue-address-postcode' id='venueAddressPostcode' value='" + window.venuePostCode + "' />" +
         "</div>";
+		
+		var checked = "checked=checked";
+		if(window.rEmail == 1){
+			checked = "checked=checked";
+		} else {
+			checked = "";
+		}
+		
+		details += "<br /><br /><label class='control control-checkbox'>" + 
+        "RECEIVE REDEMPTION EMAILS?" +
+        "<input type='checkbox' id='rEmail' " + checked + " />" +
+        "<div class='control_indicator'></div>" +
+		"</label>"
 
     details += "<br /><br /><div class='venue-details-submit' >" +
         "<button type='text' class='venue-details-submit-button' id='venue-submit' >SUBMIT CHANGES</button>" +
@@ -290,6 +264,13 @@ function submitDetails(){
     var venueAddressCounty = $("#venueAddressCounty").val();
     var venueAddressCountry= $("#venueAddressCountry").val();
     var venueAddressPostCode = $("#venueAddressPostcode").val();
+	var r = $("#rEmail");
+	
+	if(r.prop("checked")){
+		var rEmail = 1;
+	} else {
+		var rEmail = 0;
+	}
 
     if(venueDescription == ""){
         modalText.html("YOU MUST ENTER A DESCRIPTION<br /><br />" +
@@ -340,7 +321,9 @@ function submitDetails(){
                 "vAddressCity": venueAddressCity,
                 "vAddressCounty": venueAddressCounty,
                 "vAddressCountry": venueAddressCountry,
-                "vAddressPostCode": venueAddressPostCode
+                "vAddressPostCode": venueAddressPostCode,
+				"vid": window.venueID,
+				"rEmail": rEmail
             },
             success: function(json){
 				if((json.code != undefined || json.code != 'undefined') && json.code == 8){
