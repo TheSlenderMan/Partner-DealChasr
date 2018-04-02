@@ -23,11 +23,7 @@ if(isset($_GET['valExpired'])){
 } else {
 	$exp = 0;
 }
-if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
-	$sa = 1;
-} else {
-	$sa = 0;
-}
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -41,14 +37,14 @@ if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
         <link rel="manifest" href="site.webmanifest" />
-        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff">
+        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#f9a603">
+        <meta name="msapplication-TileColor" content="#f9a603">
+        <meta name="theme-color" content="#f9a603">
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" ></script>
         <script src="http://my.dealchasr.co.uk/js/tokens.js" type="text/javascript" ></script>
 		<script src="http://my.dealchasr.co.uk/js/login.js" type="text/javascript" ></script>
-		
+
 		<script>
 		var isMobile = {
 			Android: function() {
@@ -70,13 +66,22 @@ if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
 				return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
 			}
 		};
-		
+
+		<?
+			if(isset($_GET['app_location']) && ($_GET['app_location'] == 1 || $_GET['app_location'] == '1')){
+				$sa = 1;
+			} else {
+				$sa = 0;
+			}
+		?>
+
 		var inew = <?php echo $new; ?>;
 		var validated = <?php echo $val; ?>;
 		var exp = <?php echo $exp; ?>;
 		var appShow = <?php echo $sa; ?>;
+		console.log(appShow);
             $(document).ready(function(){
-			   if(appShow == 0){
+			   if(appShow == 0 || appShow == '0'){
 				   var i = $("#install");
 				   i.show();
 						
