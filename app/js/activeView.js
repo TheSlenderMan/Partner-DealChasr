@@ -2,11 +2,11 @@ $(document).ready(function(){
     $(document).on("click", ".close-modal-active", function(){
         $("#modal-cover").hide();
         var action = $("#action-container");
-		action.html("<div class='loading' >LOADING</div>");
+		action.html("<div class='loading' ><i class='fas fa-spinner'></i></div>");
 		setTimeout(function(){
-			action.hide("fast");
 			$("#master-container").css("opacity", "1");
 			$("#ui-datepicker-div").remove();
+			getActiveView();
 		}, 1000);
     });
 

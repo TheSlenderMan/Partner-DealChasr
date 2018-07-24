@@ -295,7 +295,7 @@ function getStatsView(){
 						
 						statsView += "<div id='invoice' >" + 
 						"<div class='invoice-date' >" + justDate + "</div>" + 
-						"<div class='invoice-amount' >£" + total + "</div>" + 
+						"<div class='invoice-amount' >£" + total.toFixed(2) + "</div>" +
 						"<div class='invoice-status' >" + paid + "</div>" + 
 						"<div class='invoice-view' id='" + v.id + "' >VIEW/PAY</div>" + 
 						"</div><br /><br />";

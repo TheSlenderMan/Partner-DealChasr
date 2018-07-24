@@ -30,10 +30,6 @@ $(document).ready(function(){
     $(document).on("change", "#inputfile",function(){
         uploadFile();
     });
-	
-	$(document).on("click", ".p-upgrade-btn", function(){
-		upgradeAccount($(this));
-	});
 
 });
 
@@ -404,75 +400,19 @@ function uploadFile() {
 		cache: false,
 		processData:false,
 		success: function(data){
-			if((json.code != undefined || json.code != 'undefined') && json.code == 8){
+			if((data.code != undefined || data.code != 'undefined') && data.code == 8){
 				refreshToken(refresh, client, uploadFile);
-			} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
+			} else if((data.code != undefined || data.code != 'undefined') && data.code == 9) {
 				window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
 			} else {
 				console.log(data.updated);
 				var venueView = $("#venue-message");
 				venueView.css("background-image", "url(" + data.updated + ")");
-				$(".venue-details-title").css("background-image", "url(" + data.updated + ")");
+				$("#venue-image").css("background-image", "url(" + data.updated + ")");
+				$("#venue-view-image").css("background-image", "url(" + data.updated + ")");
 				window.venueHeader = data.updated;
 				modal.hide();
 			}
 		}
 	});
-}
-
-function upgradeAccount(th){
-	if(!getCookie("DSAT")){
-		var ts = getToken(2, function(){upgradeAccount(th);});
-		return false;
-	} else {
-		var token = getCookie("DSAT");
-		var refresh = getCookie("DSRT");
-		var client = getCookie("DSCL");
-	}
-	
-	if(!getCookie("DSUID") || !getCookie("DSUTOKEN")){
-		window.location.href = 'http://admin.dealchasr.co.uk/app/logout.php';
-	} else {
-		var utoken = getCookie("DSUTOKEN");
-		var uuid = getCookie("DSUID");
-	}
-	
-	var newTier = th.attr('id');
-	th.html("UPDATING ACCOUNT...");
-	if(confirm("Are you sure you want to upgrade/downgrade your account?")){
-		$.ajax({
-			url: 'http://api.almanacmedia.co.uk/venues/upgrade',
-			type: 'POST',
-			dataType: 'JSON',
-			data:{
-				"venueID": window.venueID,
-				"oldTier": window.tier,
-				"newTier": newTier,
-				"email": window.venueEmail
-			},
-			headers:{
-				"Authorization": "DS1k1Il68_uPPoD:" + client,
-				"DSToken": token,
-				"DSUid": uuid,
-				"DSUtoken" : utoken
-			},
-			success: function(json){
-				if((json.code != undefined || json.code != 'undefined') && json.code == 8){
-					refreshToken(refresh, client, function(){upgradeAccount(th);});
-				} else if((json.code != undefined || json.code != 'undefined') && json.code == 9) {
-					window.location.href = 'http://my.dealchasr.co.uk/app/logout.php';
-				} else {
-					if(json.upgraded == 1){
-						th.html("ACCOUNT UPGRADED... ");
-						setTimeout(function(){
-							window.location.href = "http://my.dealchasr.co.uk?upgraded=true";
-						}, 2500);
-					}
-				}
-			},
-			error: function(e){
-				console.log(e);
-			}
-		});
-	}
 }

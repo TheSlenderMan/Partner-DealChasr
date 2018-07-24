@@ -45,6 +45,8 @@ $(document).ready(function(){
 						$(".loading").html("DETAILS UNAVAILABLE.<br /><br /><div class='close-action' >X</div>");
 					}
 					break;
+				case "venue_subscription":
+					getSubscriptionView();
 				case "logout":
 					if(window.app == 1){
 						var add = "?app_location=1";
@@ -123,10 +125,6 @@ $(document).ready(function(){
 
     $(document).on("click", ".voucher-enddate", function(e){
         e.preventDefault();
-    });
-
-    $(document).on("click", ".logout-button", function(e){
-
     });
 
     $(document).on("click", ".voucher-submit-button", function(){
