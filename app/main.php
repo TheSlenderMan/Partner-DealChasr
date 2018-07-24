@@ -77,8 +77,7 @@ if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
                 <div id="links" >
                     <div class="section" id="stats-section" >
                         <div class="section-title" >Settings</div>
-                        <div class="main-link" id="stats" ><i class="fas fa-chart-line" style='padding-right:5px;'></i>Dashboard</div>
-                        <div class="main-link" id="invoices" ><i class="fas fa-file-alt" style='padding-right:8px;'></i>Invoices</div>
+                        <div class="main-link" id="stats" ><i class="fas fa-chart-line" style='padding-right:5px;'></i>Dashboard &amp; Invoices</div>
                         <div class="main-link" id="venue_details" ><i class="fas fa-user" style='padding-right:5px;'></i>Account</div>
                         <div class="main-link" id="venue_subscription" ><i class="fas fa-sun" style='padding-right:5px;'></i>Subscription</div>
                     </div>

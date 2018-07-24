@@ -12,28 +12,44 @@ $(document).ready(function(){
         $("#deal-flow").html("").append($(this).html() + "<input type='button' class='deal-submit-button' value='CREATE DEAL' />");
 
         var dealDetailsView = $("#deal-details");
-        var dealDetails = "<div class='part-title' >ENTER DEAL DETAILS</div>";
-        dealDetails += "<div class='deal-details-holder' >";
-        dealDetails += "<br /><br /><label>DEAL TITLE</label><br />" +
-            "<input type='text' class='text-one-center' name='dealTitle' id='dealTitle' />";
-        dealDetails += "<br /><br /><label>DEAL DESCRIPTION</label><br />" +
-            "<textarea class='text-two' maxlength='140' id='dealDesc' ></textarea>";
-        dealDetails += "<br /><br /><label>DEAL START DATE</label><br />" +
-            "<input type='text' class='text-one-center' name='dealDate' id='dealDate' />";
-        dealDetails += "<br /><br /><br /><label>DEAL START TIME</label><br />" +
-            "<input type='text' name='dealTime' id='dealTime' /><br /><br /><br />";
-        dealDetails += "<label class='control control-checkbox'>" + 
-        "RECURRING? (For Weekly Events)" +
+        var dealDetails = "<div id='deal-view-create-header' >Deal Details</div>";
+        dealDetails += "<table id='deal-view-details-table'>" +
+			"<tr>";
+        dealDetails += "<td class='deal-view-table-label'>" +
+			"<label>Deal Title</label>" +
+			"</td><td>" +
+            "<input type='text' class='text-one' name='dealTitle' id='dealTitle' />" +
+			"</td></tr><tr>";
+        dealDetails += "<td class='deal-view-table-label'>" +
+			"<label>Deal Description</label>" +
+			"</td><td>" +
+            "<textarea class='text-two' maxlength='140' id='dealDesc' ></textarea>" +
+			"</td></tr><tr>";
+        dealDetails += "<td class='deal-view-table-label'>" +
+			"<label>Deal Start Date</label>" +
+			"</td><td>" +
+            "<input type='text' class='text-one-center' name='dealDate' id='dealDate' />" +
+			"</td></tr><tr>";
+        dealDetails += "<td class='deal-view-table-label'>" +
+			"<label>Deal Start Time</label>" +
+			"</td><td>" +
+            "<input type='text' name='dealTime' id='dealTime' />" +
+			"</td></tr><tr>";
+        dealDetails += "<td colspan='2' class='deal-view-table-label'>" +
+			"<label class='control control-checkbox'>" +
+        "Recurs Weekly?" +
         "<input type='checkbox' id='recurring' />" +
         "<div class='control_indicator'></div>" +
-		"</label>";
-        dealDetails += "<br /><br /><label class='control control-checkbox'>" + 
-        "DAILY? (For Daily Events)" +
+		"</label>" +
+			"</td></tr><tr>";
+        dealDetails += "<td colspan='2' class='deal-view-table-label'>" +
+			"<label class='control control-checkbox'>" +
+        "Recurs Daily?" +
         "<input type='checkbox' id='daily' />" +
         "<div class='control_indicator'></div>" +
 		"</label>" +
-        "<div class='spacer' ></div>";
-        dealDetails += "</div>";
+			"</td></tr></table>" +
+        "<br /><br />";
 
         dealDetailsView.html(dealDetails);
 
@@ -52,18 +68,23 @@ function getAddDealView(){
     var action = $("#action-container");
 
     var dealView = "<div id='new-deal' >";
-    dealView += "<div class='new-deal-title' style='background-image:url(" + window.venueHeader + ")' >" +
-        "ADD NEW DEAL<div class='close-action' >X</div></div>";
+    dealView += "<div id='deal-view-header' >" +
+        "<div id='deal-view-top-bar' >" +
+		"<div class='view-title'>Create a new Deal</div>" +
+		"</div>";
 
-    dealView += "<div id='deal-view-types' >";
-    dealView += "<div class='part-title' >CHOOSE DEAL TYPE</div>";
-    dealView += "<div class='deal-view-type' id='1' >FOOD</div>";
-    dealView += "<div class='deal-view-type' id='2' >DRINK</div>";
-    dealView += "<div class='deal-view-type' id='3' >EVENT</div>";
-    dealView += "</div>";
+		dealView += "<div id='deal-view-types' >";
+		dealView += "<div class='part-title' >Deal</div>" +
+			"<div class='deal-view-desc' >Select the type of deal you wish to create below</div><br /><br />";
+		dealView += "<div class='deal-view-type' id='1' >FOOD</div>";
+		dealView += "<div class='deal-view-type' id='2' >DRINK</div>";
+		dealView += "<div class='deal-view-type' id='3' >EVENT</div>";
+		dealView += "</div>";
+
+	dealView += "</div>";
 
     dealView += "<div id='deal-details' >";
-    dealView += "</div>";
+    dealView += "</div><div class='spacer' ></div>";
 
     dealView += "<div id='deal-flow' ></div>";
 

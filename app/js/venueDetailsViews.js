@@ -34,49 +34,7 @@ $(document).ready(function(){
 	$(document).on("click", ".p-upgrade-btn", function(){
 		upgradeAccount($(this));
 	});
-	
-	$(document).on("click", "#upgrade-account", function(){
-		var modal = $("#modal-cover");
-        var modalText = $(".modal-message");
-        modal.show();
 
-		if(window.tier == 2){
-			var p2 = 3;
-			var title2 = "PREMIUM";
-			var html2 = "<h1>&pound;5.99</h1><br /><span class='p-dur' >Per month</span>" + 
-						"<div class='p-divider' ></div><br /><br />" + 
-						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
-						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher (50 Free a month)</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >Unlimited</span><br /><br />" + 
-						"<span class='product-header' >Your location on the map - </span><span class='product-info' >All the time</span><br /><br />" + 
-						"<span class='product-header' >Premium pin on map</span><span class='product-info' ></span><br /><br /><br /><br />" + 
-						"<div class='p-upgrade-btn' id='3' >UPGRADE NOW</div>";
-		} else {
-			var p2 = 2;
-			var title2 = "PRO";
-			var html2 = "<h1>&pound;0.00</h1><br /><span class='p-dur' >Per month</span>" + 
-						"<div class='p-divider' ></div><br /><br />" + 
-						"<span class='product-header' >Voucher Limit - </span><span class='product-info' >Unlimited</span><br /><br />" + 
-						"<span class='product-header' >Voucher Cost - </span><span class='product-info' >50p Per Redeemed Voucher</span><br /><br />" + 
-						"<span class='product-header' >Deals and Events - </span><span class='product-info' >1</span><br /><br />" + 
-						"<span class='product-header' >Your location on the map - </span><span class='product-info' >When vouchers are available</span><br /><br /><br /><br />" + 
-						"<div class='p-upgrade-btn' id='2' >DOWNGRADE NOW</div>";
-		}
-		
-		var upgradeHTML = "<span class='p-title' >UPGRADE YOUR ACCOUNT</span><br />" + 
-						  "<br />Upgrading your account is easy and instant! Just choose your package below, hit upgrade or downgrade and away you go.<br /><br />" + 
-						  "Note: your invoice date will stay the same. If you are upgrading from FREE to either PRO or PREMIUM any vouchers redeemed between your upgrade and " +
-						  " next invoice will be chargeable.<br /><br /><br />";
-		
-		upgradeHTML += "<div class='upgrade-container' >" + 
-					   "<div class='product-2' >" + 
-					   "<span class='p-title' >" + title2 + "</span><br /><br />" + 
-					   html2 + "</div></div><br /><br />";
-					   
-		upgradeHTML += "<br /><br /><div class='close-modal-centered' >CLOSE</div>";
-					   
-        modalText.html(upgradeHTML);
-	});
 });
 
 function getDetailsView(){
@@ -131,25 +89,25 @@ function getDetailsView(){
     details += "<td class='venue-view-table-label' >" +
         "<label>WEBSITE</label>" +
 		"</td><td>" +
-        "<input type='text' class='text-one-center' name='venue-website' id='venueWebsite' value='" + window.venueWebsite + "' />" +
+        "<input type='text' class='text-one' name='venue-website' id='venueWebsite' value='" + window.venueWebsite + "' />" +
         "</td></tr><tr>";
 
     details += "<td class='venue-view-table-label' >" +
         "<label>OPEN HOURS (E.G 12PM - 12AM)</label>" +
 		"</td><td>" +
-        "<input type='text' class='text-one-center' name='venue-open' id='venueOpen' value='" + window.venueOpenHours + "' />" +
+        "<input type='text' class='text-one' name='venue-open' id='venueOpen' value='" + window.venueOpenHours + "' />" +
         "</td></tr><tr>";
 
     details += "<td class='venue-view-table-label' >" +
         "<label>CONTACT NUMBER</label>" +
 		"</td><td>" +
-        "<input type='text' class='text-one-center' name='venue-contact' id='venueContact' value='" + window.venueContact + "' />" +
+        "<input type='text' class='text-one' name='venue-contact' id='venueContact' value='" + window.venueContact + "' />" +
         "</td></tr><tr>";
 		
 	details += "<td class='venue-view-table-label' >" +
         "<label>CONTACT EMAIL</label>" +
 		"</td><td>" +
-        "<input type='text' class='text-one-center' name='venue-email' id='venueEmail' value='" + window.venueEmail + "' />" +
+        "<input type='text' class='text-one' name='venue-email' id='venueEmail' value='" + window.venueEmail + "' />" +
         "</td></tr><tr>";
 
     details += "<td class='venue-view-table-label' >" +
@@ -200,7 +158,8 @@ function getDetailsView(){
         "</td></tr><tr>";
 
     if(window.validated == 0){
-        details += "<td colspan='2' class='venue-view-table-button'>" +
+        details += "<td colspan='2' class='venue-view-table-title'>VALIDATION</td></tr><tr>" +
+			"<td colspan='2' class='venue-view-table-button'>" +
             "<button type='text' class='venue-details-validate-button' id='venue-validate' >VALIDATE EMAIL</button>" +
             "</td></tr><tr>";
     }
@@ -212,7 +171,8 @@ function getDetailsView(){
 		statusStr = "ACTIVATE ACCOUNT";
 	}
 		
-	details += "<td colspan='2' class='venue-view-table-button'>" +
+	details += "<td colspan='2' class='venue-view-table-title'>DEACTIVATE/ACTIVATE</td></tr><tr>" +
+		"<td colspan='2' class='venue-view-table-button'>" +
         "<button type='text' class='venue-details-status-button' id='venue-status' data=" + window.accountActive + " >" + statusStr + "</button>" +
         "</td></tr></table>";
 

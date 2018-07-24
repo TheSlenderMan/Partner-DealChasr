@@ -168,9 +168,15 @@ function getActiveView(){
     var actionView = $("#action-container");
     var activeView = "";
     activeView += "<div id='new-voucher' >";
-    activeView += "<div class='new-voucher-title' style='background-image:url(" + window.venueHeader + ")' >" +
-        "ACTIVE VOUCHERS<div class='close-action' >X</div></div>";
-    activeView += "<div class='active-deals-vouchers' >";
+    activeView += "<div id='active-view-header' >" +
+        "<div id='active-view-top-bar' >" +
+		"<div class='view-title'>Active Deals &amp; Vouchers</div>" +
+		"</div>" +
+		"<div class='active-view-desc' >View, Remove and End Deals and Vouchers respectively here<br /><br />" +
+		"Vouchers can only be cancelled before any are redeemed. Deals can be removed at anytime</div>" +
+		"</div>";
+    activeView += "<div class='active-deals-vouchers' >" +
+		"<div id='active-view-ex-header'>Active Deals &amp; Vouchers</div>";
     activeView += "</div>";
     actionView.html(activeView);
 

@@ -93,14 +93,28 @@ $(document).ready(function(){
         $("#voucher-flow").append(" - " + $(this).html() + "<input type='button' class='voucher-submit-button' value='CREATE VOUCHER' />");
 
         var voucherDetailsView = $("#voucher-details");
-        var voucherDetails = "<div class='part-title' >ENTER VOUCHER DETAILS</div>";
-        voucherDetails += "<div class='voucher-details-holder' >";
-        voucherDetails += "<br /><br /><label>HOW MANY VOUCHERS?</label><br /><input type='text' class='text-one-center' name='voucherCount' id='voucherCount' />";
-        voucherDetails += "<br /><br /><label>VOUCHER DESCRIPTION</label><br />" +
-            "<textarea class='text-two' maxlength='140' id='voucherDesc' ></textarea><br/><br />";
-        voucherDetails += "<label>VOUCHER END TIME (Your voucher must end today)</label>" +
-            "<input type='text' name='endDate' id='endDate' />";
-        voucherDetails += "</div><div class='spacer' ></div>";
+        var voucherDetails = "";
+        voucherDetails += "<div id='voucher-view-details-holder' >" +
+			"<div id='voucher-view-details-header'>Voucher Details</div>" +
+			"<table id='voucher-view-details-table'><tr>";
+        voucherDetails += "<td class='voucher-view-table-label'>" +
+			"<label>How many vouchers?</label>" +
+			"</td><td>" +
+			"<input type='text' class='text-one' name='voucherCount' id='voucherCount' />" +
+			"</td></tr><tr>";
+        voucherDetails += "<td class='voucher-view-table-label'>" +
+			"<label>Voucher Description</label>" +
+			"</td>" +
+            "<td>" +
+			"<textarea class='text-two' maxlength='140' id='voucherDesc' ></textarea>" +
+			"</td></tr><tr>";
+        voucherDetails += "<td class='voucher-view-table-label'>" +
+			"<label>Voucher end time (Your voucher must end today)</label>" +
+			"</td><td>" +
+            "<input type='text' name='endDate' id='endDate' />" +
+			"</td></tr></table>";
+        voucherDetails += "<br /><br /></div>" +
+			"<div class='spacer' ></div>";
 
         voucherDetailsView.html(voucherDetails);
 
@@ -126,7 +140,7 @@ $(document).ready(function(){
             var action = $("#action-container");
 			action.html("<div class='loading' ><i class='fas fa-spinner'></i></div>");
 			setTimeout(function(){
-				action.hide("fast");
+				getAddVoucherView();
 				$("#master-container").css("opacity", "1");
 				$("#ui-datepicker-div").remove();
 				window.created = 0;
@@ -143,11 +157,10 @@ $(document).ready(function(){
 		var action = $("#action-container");
 		action.html("<div class='loading' ><i class='fas fa-spinner'></i></div>");
 		setTimeout(function(){
-			action.hide("fast");
 			$("#master-container").css("opacity", "1");
 			$("#ui-datepicker-div").remove();
             window.created = 0;
-			getVenueDetails();
+			window.location.reload();
 		}, 1000);
       
     });
@@ -208,7 +221,7 @@ function resendEmail(th){
 function getOffers(did){
     var voucherTypeView = $("#voucher-types");
     var voucherTypes = "";
-    voucherTypes += "<div class='part-title' >CHOOSE YOUR OFFER</div>";
+    voucherTypes += "<div id='voucher-view-create-header' >Voucher Offer</div>";
     switch(did){
         case '1':
             voucherTypes += "<div class='voucher-type' id='3' >10% OFF</div>";
@@ -224,7 +237,7 @@ function getOffers(did){
             break;
         case '2':
             voucherTypes += "<div class='voucher-type' id='1' >2 FOR 1</div>";
-            voucherTypes += "<div class='voucher-type' id='2' style='font-size:13px !important;' >FREE DRINKS</div>";
+            voucherTypes += "<div class='voucher-type' id='2' >FREE DRINKS</div>";
             voucherTypes += "<div class='voucher-type' id='3' >10% OFF</div>";
             voucherTypes += "<div class='voucher-type' id='4' >20% OFF</div>";
             voucherTypes += "<div class='voucher-type' id='5' >30% OFF</div>";
@@ -254,6 +267,8 @@ function getOffers(did){
             voucherTypes += "<div class='voucher-type' id='12' >100% OFF</div>";
             break;
     }
+
+	voucherTypes += "<br /><br />";
     voucherTypeView.html(voucherTypes);
 }
 
@@ -263,15 +278,22 @@ function getAddVoucherView(){
     var action = $("#action-container");
 
     var voucherView = "<div id='new-voucher' >";
-    voucherView += "<div class='new-voucher-title' style='background-image:url(" + window.venueHeader + ")' >" +
-        "ADD NEW VOUCHER<div class='close-action' >X</div></div>";
+    voucherView += "<div id='voucher-view-header'>" +
+		"<div id='voucher-view-top-bar'>" +
+		"<div class='view-title' >Create a new Voucher</div>" +
+		"</div>";
 
-    voucherView += "<div id='deal-types' >";
-    voucherView += "<div class='part-title' >CHOOSE VOUCHER TYPE</div>";
-    voucherView += "<div class='deal-type' id='1' >FOOD</div>";
-    voucherView += "<div class='deal-type' id='2' >DRINK</div>";
-    voucherView += "<div class='deal-type' id='3' >EVENT</div>";
-    voucherView += "</div>";
+		voucherView += "<div id='deal-types' >";
+		voucherView += "<div class='part-title' >Voucher type</div>" +
+			"<div class='voucher-view-desc' >Select the type of voucher you wish to create below</div><br /><br />";
+		voucherView += "<div class='deal-type' id='1' >FOOD</div>";
+		voucherView += "<div class='deal-type' id='2' >DRINK</div>";
+		voucherView += "<div class='deal-type' id='3' >EVENT</div>";
+		voucherView += "</div>";
+
+		voucherView += "</div>";
+
+
 
     voucherView += "<div id='voucher-types' >";
     voucherView += "</div>";

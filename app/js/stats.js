@@ -269,11 +269,13 @@ function getStatsView(){
 					"<div class='number'>" + dealCount + "</div><div class='number-title'>total interests</div></div></div>";
 
 				statsView += "<div id='stats-chart' style='height: 250px;'></div>";
-				
-				/*statsView += "<br /><br /><br /><div class='chart-title' >INVOICES (LAST 5)</div><br /><br />";
-				statsView += "<div id='invoices-container' >";
+
+				statsView += "<div style='width:100%;border-bottom:1px solid #c5c5c5;height:50px;clear:both;'></div>";
+
+				statsView += "<div id='invoices-container' >" +
+					"<div id='stats-view-invoice-header'>Invoices</div><br /><br /><br />";
 				if(json.invoices.length == 0){
-					statsView += "<br /><br />NO INVOICES TO SHOW";
+					statsView += "<div class='stats-view-none' >NO INVOICES TO SHOW</div>";
 				} else {
 					$.each(json.invoices, function(k, v){
 						if(v.invoicePaid == 1 && v.cancelled == 0){
@@ -299,7 +301,7 @@ function getStatsView(){
 						"</div><br /><br />";
 					});
 				}
-				statsView += "</div><br /><br />";*/
+				statsView += "</div><br /><br />";
 				
 				statsView += "</div>";
 

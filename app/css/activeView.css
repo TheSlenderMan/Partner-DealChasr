@@ -1,27 +1,31 @@
-.active-deals-vouchers{position:relative;top:0;left:50%;width:90%;height:100%;margin:0 0 0 -45%;}
+#active-view-header{position:relative;top:0;left:0;width:100%;height:250px;background-color:#fff;border-bottom:1px solid #d6d6d6;}
+#active-view-top-bar{position:relative;top:0;left:0;width:100%;height:50px;border-bottom:1px solid #d6d6d6;}
 
-.active-voucher{position:relative;top:20px;left:5%;width:90%;border-radius:5px;-webkit-box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);margin:20px 0 0 0;}
-.active-deal{position:relative;top:20px;left:5%;width:90%;border-radius:5px;-webkit-box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);box-shadow: 0px 2px 21px 0px rgba(0,0,0,0.75);margin:20px 0 0 0;}
+.active-view-desc{position:relative;top:40px;left:20px;width:100%;padding:0 0 0 0;font-family:'Amiko', sans-serif;font-size:12px;color:#aaa;}
 
-.voucher-title{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
+.active-deals-vouchers{position:relative;top:30px;left:20px;width:calc(100% - 40px);background-color:#fff;border:1px solid #DDD;border-radius:3px;}
+#active-view-ex-header{width:calc(100% - 20px);height:50px;background-color:#F9A603;color:#fff;border-top-left-radius:3px;border-top-right-radius:3px;line-height:50px;padding:0 0 0 20px;font-family:'Amiko', sans-serif;font-size:12px;}
+
+.active-voucher{position:relative;top:20px;left:5%;width:90%;border:none;border-bottom:1px solid #aaa;margin:20px 0 0 0;}
+.active-deal{position:relative;top:20px;left:5%;width:90%;border-bottom:1px solid #aaa;margin:20px 0 0 0;}
+
+.voucher-title{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:12px;
     color:#F9A603;font-weight:bold;}
-.deal-title{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
+.deal-title{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:12px;
     color:#0055ff;font-weight:bold;}
 
-.voucher-expires{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:14px;
-    color:#000000;font-weight:bold;}
-.deal-date{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:14px;
-    color:#000000;font-weight:bold;}
+.voucher-expires{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:12px;
+    color:#aaa;font-weight:bold;}
+.deal-date{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:12px;
+    color:#aaa;font-weight:bold;}
 
 .voucher-count{padding:5px;width:100%;text-align:center;font-family:'Amiko', sans-serif;font-size:20px;
     color:#F9A603;font-weight:bold;}
 
 
-.voucher-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
+.voucher-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:12px;
     color:#FFFFFF;font-weight:bold;background-color:#F9A603;cursor:pointer;}
-.voucher-deactivate-not{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
+.voucher-deactivate-not{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:12px;
     color:#FFFFFF;font-weight:bold;background-color:#F9A603;cursor:pointer;}
-.deal-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:18px;
+.deal-deactivate{position:relative;bottom:0;left:0;padding:10px;text-align:center;font-family:'Amiko', sans-serif;font-size:12px;
     color:#FFFFFF;font-weight:bold;background-color:#0055FF;cursor:pointer;}
