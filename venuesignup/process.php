@@ -36,8 +36,7 @@ if(isset($_POST['fullName']) && isset($_POST['vTier'])){
     ));
 	$user_output = curl_exec ($ch);
 	$user_res = json_decode($user_output, true);
-	curl_close ($ch);
-	
+
 	if(isset($user_res['data'])){
 		if(isset($user_res['data']['created']) && $user_res['data']['created'] == 1){
 			$uid = $user_res['data']['userID'];
@@ -61,7 +60,7 @@ if(isset($_POST['fullName']) && isset($_POST['vTier'])){
 			$ven_output = curl_exec ($cs);
 			$ven_res = json_decode($ven_output, true);
 			curl_close ($cs);
-			
+
 			if(isset($ven_res['data']['created']) && $ven_res['data']['created'] == 1){
 				header("location: http://my.dealchasr.co.uk?new=" . $ven_res['data']['venueID'] . "&email=" . $vEmail);
 			} else {

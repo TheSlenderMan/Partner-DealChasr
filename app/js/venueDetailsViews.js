@@ -82,56 +82,101 @@ $(document).ready(function(){
 function getDetailsView(){
     var actionView = $("#action-container");
     var details = "";
+
+	if(window.tier == 1){
+		var tierStr = "FREE ACCOUNT";
+	} else if(window.tier == 2){
+		var tierStr = "PRO ACCOUNT";
+	} else {
+		var tierStr = "PREMIUM ACCOUNT";
+	}
+
+	if(window.validated == 1){
+		var valStr = "<span style='color:forestgreen;'><i class='fas fa-check' style='padding-right:5px;'></i>Account Verified</span>";
+	} else {
+		var valStr = "<span style='color:darkred;'><i class='fas fa-times' style='padding-right:5px;'></i>Account Unverified</span>";
+	}
+
     details += "<div id='venue-details' >";
-    details += "<div class='venue-details-title' style='background-image:url(" + window.venueHeader + ")' >" +
-        "VENUE DETAILS<div class='close-action' >X</div>" +
+    details += "<div id='venue-view-header' >" +
+		"<div id='venue-view-top-bar' >" +
+		"<div class='view-title' >Your Account</div>" +
+		"<div id='venue-view-image' style='background-image:url(" + window.venueHeader + ")' >" +
         "<div class='upload-button' >" +
         "<input type='file' id='inputfile' name='venueheader' />" +
-        "<button class='upload-button-btn' > UPLOAD NEW IMAGE</button>" +
+        "<button class='upload-button-btn' ><i class='fas fa-edit'></i></button>" +
         "</div>" +
-        "</div>";
+		"</div>" +
+		"<div id='venue-view-account-details' >" +
+		"<div class='venue-view-tier' >" + tierStr + "</div>" +
+		"<div class='venue-view-verified'>" + valStr + "</div>" +
+		"<div class='venue-view-vouchers' >" + window.venueVouchersRemaining + " vouchers remaining<br />" + window.venueVouchersUsed + " vouchers used</div>" +
+		"</div>" +
+        "</div>" +
+		"</div>";
 
-    details += "<div class='venue-details-container' >";
+    details += "<div class='venue-details-container' >" +
+		"<div id='venue-view-edit-header' >Edit Account Details <i class='fas fa-edit'></i></div>";
 
-    details += "<br /><br /><div class='venue-desc' >" +
-        "<label>EDIT VENUE DESCRIPTION (The best you can with 140 characters)</label><br />" +
+
+	details += "<table id='venue-view-details-table' >" +
+		"<tr>" +
+		"<td colspan='2' class='venue-view-table-title'>VENUE DETAILS</td></tr><tr>";
+    details += "<td class='venue-view-table-label' >" +
+        "<label>EDIT VENUE DESCRIPTION (The best you can with 140 characters)</label>" +
+		"</td><td>" +
         "<textarea maxlength='140' class='text-two' id='venueDesc' >" + window.venueDesc + "</textarea><br />" +
-        "</div>";
+        "</td></tr><tr>";
 
-    details += "<br /><br /><div class='venue-website' >" +
-        "<label>WEBSITE</label><br />" +
+    details += "<td class='venue-view-table-label' >" +
+        "<label>WEBSITE</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one-center' name='venue-website' id='venueWebsite' value='" + window.venueWebsite + "' />" +
-        "</div>";
+        "</td></tr><tr>";
 
-    details += "<br /><br /><div class='venue-open' >" +
-        "<label>OPEN HOURS (E.G 12PM - 12AM)</label><br />" +
+    details += "<td class='venue-view-table-label' >" +
+        "<label>OPEN HOURS (E.G 12PM - 12AM)</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one-center' name='venue-open' id='venueOpen' value='" + window.venueOpenHours + "' />" +
-        "</div>";
+        "</td></tr><tr>";
 
-    details += "<br /><br /><div class='venue-contact' >" +
-        "<label>CONTACT NUMBER</label><br />" +
+    details += "<td class='venue-view-table-label' >" +
+        "<label>CONTACT NUMBER</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one-center' name='venue-contact' id='venueContact' value='" + window.venueContact + "' />" +
-        "</div>";
+        "</td></tr><tr>";
 		
-	details += "<br /><br /><div class='venue-email' >" +
-        "<label>CONTACT EMAIL</label><br />" +
+	details += "<td class='venue-view-table-label' >" +
+        "<label>CONTACT EMAIL</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one-center' name='venue-email' id='venueEmail' value='" + window.venueEmail + "' />" +
-        "</div>";
+        "</td></tr><tr>";
 
-    details += "<br /><br /><div class='venue-address' >" +
-        "<label>ADDRESS ONE</label><br />" +
+    details += "<td class='venue-view-table-label' >" +
+        "<label>ADDRESS ONE</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one' name='venue-address-one' id='venueAddressOne' value='" + window.venueAddressOne + "' />" +
-        "<br /><br /><label>ADDRESS TWO</label>" +
+        "</td></tr><tr><td class='venue-view-table-label' >" +
+		"<label>ADDRESS TWO</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one' name='venue-address-two' id='venueAddressTwo' value='" + window.venueAddressTwo + "' />" +
-        "<br /><br /><label>CITY / TOWN</label>" +
+        "</td></tr><tr><td class='venue-view-table-label' >" +
+		"<label>CITY / TOWN</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one' name='venue-address-city' id='venueAddressCity' value='" + window.venueCityTown + "' />" +
-        "<br /><br /><label>COUNTY</label>" +
+        "</td></tr><tr><td class='venue-view-table-label' >" +
+		"<label>COUNTY</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one' name='venue-address-county' id='venueAddressCounty' value='" + window.venueCounty + "' />" +
-        "<br /><br /><label>COUNTRY</label>" +
+        "</td></tr><tr><td class='venue-view-table-label' >" +
+		"<label>COUNTRY</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one' name='venue-address-country' id='venueAddressCountry' value='" + window.venueCountry + "' />" +
-        "<br /><br /><label>POST CODE</label>" +
+        "</td></tr><tr><td class='venue-view-table-label' >" +
+		"<label>POST CODE</label>" +
+		"</td><td>" +
         "<input type='text' class='text-one' name='venue-address-postcode' id='venueAddressPostcode' value='" + window.venuePostCode + "' />" +
-        "</div>";
+        "</td></tr><tr>";
 		
 		var checked = "checked=checked";
 		if(window.rEmail == 1){
@@ -140,25 +185,25 @@ function getDetailsView(){
 			checked = "";
 		}
 		
-		details += "<br /><br /><label class='control control-checkbox'>" + 
+		details += "<td colspan='2' class='venue-view-table-title'>EMAILS &amp; CONTACT</td></tr><tr>" +
+			"<td class='venue-view-table-label' colspan='2' >" +
+			"<label class='control control-checkbox'>" +
         "RECEIVE REDEMPTION EMAILS?" +
         "<input type='checkbox' id='rEmail' " + checked + " />" +
         "<div class='control_indicator'></div>" +
-		"</label>"
+		"</label>" +
+			"</td></tr><tr>" +
+			"<td colspan='2' class='venue-view-table-title'>&nbsp;</td></tr><tr>";
 
-    details += "<br /><br /><div class='venue-details-submit' >" +
+    details += "<td colspan='2' class='venue-view-table-button'>" +
         "<button type='text' class='venue-details-submit-button' id='venue-submit' >SUBMIT CHANGES</button>" +
-        "</div>";
+        "</td></tr><tr>";
 
     if(window.validated == 0){
-        details += "<br /><br /><div class='venue-details-status' >" +
+        details += "<td colspan='2' class='venue-view-table-button'>" +
             "<button type='text' class='venue-details-validate-button' id='venue-validate' >VALIDATE EMAIL</button>" +
-            "</div>";
+            "</td></tr><tr>";
     }
-	
-	if(window.tier < 3){
-		details += '<div class="ribbon" id="upgrade-account" ><div class="ribbon-stitches-top"></div><strong class="ribbon-content"><h1>UPGRADE</h1></strong><div class="ribbon-stitches-bottom"></div></div>';
-	}
 		
 	var statusStr = "";
 	if(window.accountActive == 1){
@@ -167,12 +212,11 @@ function getDetailsView(){
 		statusStr = "ACTIVATE ACCOUNT";
 	}
 		
-	details += "<br /><br /><div class='venue-details-status' >" +
+	details += "<td colspan='2' class='venue-view-table-button'>" +
         "<button type='text' class='venue-details-status-button' id='venue-status' data=" + window.accountActive + " >" + statusStr + "</button>" +
-        "</div>";
+        "</td></tr></table>";
 
-    details += "<div class='spacer' ></div>" +
-        "</div>";
+    details += "<br /><br /><br /></div><div class='spacer' ></div>";
 
     actionView.html(details);
 }

@@ -248,21 +248,29 @@ function getStatsView(){
 				var activeView = $("#action-container");
 
 				var statsView = "<div id='new-voucher' >";
-				statsView += "<div class='new-voucher-title' style='background-image:url(" + window.venueHeader + ")' >" +
-					"STATISTICS<div class='close-action' >X</div></div>";
+				statsView += "<div id='stats-view-header'>";
+				statsView += "<div id='stats-view-top-bar'>" +
+					"<div class='view-title' >Dashboard</div>" +
+					"<div class='stats-view-venue-name' >" + window.venueName + "</div>" +
+					"<div class='stats-view-venue-address'><i class='fas fa-map-marker' style='padding-right:10px;'></i>" + window.venueCityTown + ", " + window.venueCountry + "" +
+					" - <a target='_blank' href='" + window.venueWebsite + "' >" + window.venueWebsite + "</a></div>" +
+					"</div>";
+				statsView += "</div>";
 
 				statsView += "<div class='stats-view' >";
 
-				statsView += "<div class='redeemed-vouchers' id='' >TOTAL REDEEMED<br />" +
-					"<span class='v-count-text' >" + voucherCount + "</span><br /><br /><br /><br /></div>";
+				statsView += "<div class='total-vouchers' id='' ><div class='total-vouchers-circle' >" +
+					"<div class='number'>" + voucherCount + "</div><div class='number-title'>total live vouchers</div></div></div>";
 
-				statsView += "<div class='redeemed-deals' id='' >TOTAL INTERESTS<br />" +
-					"<span class='d-count-text' >" + dealCount + "</span><br /><br /><br /><br /></div>" +
-					"<div style='clear:both;' ></div>";
+				statsView += "<div class='redeemed-vouchers' id='' ><div class='redeemed-vouchers-circle' >" +
+					"<div class='number'>" + voucherCount + "</div><div class='number-title'>total redemptions</div></div></div>";
 
-				statsView += "<div class='chart-title' >REDEMPTIONS THIS MONTH</div><div id='stats-chart' style='height: 250px;'></div>";
+				statsView += "<div class='redeemed-deals' id='' ><div class='redeemed-deals-circle' >" +
+					"<div class='number'>" + dealCount + "</div><div class='number-title'>total interests</div></div></div>";
+
+				statsView += "<div id='stats-chart' style='height: 250px;'></div>";
 				
-				statsView += "<br /><br /><br /><div class='chart-title' >INVOICES (LAST 5)</div><br /><br />";
+				/*statsView += "<br /><br /><br /><div class='chart-title' >INVOICES (LAST 5)</div><br /><br />";
 				statsView += "<div id='invoices-container' >";
 				if(json.invoices.length == 0){
 					statsView += "<br /><br />NO INVOICES TO SHOW";
@@ -291,7 +299,7 @@ function getStatsView(){
 						"</div><br /><br />";
 					});
 				}
-				statsView += "</div><br /><br />";
+				statsView += "</div><br /><br />";*/
 				
 				statsView += "</div>";
 

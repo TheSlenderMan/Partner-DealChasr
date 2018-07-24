@@ -1,14 +1,26 @@
+#venue-view-header{position:relative;top:0;left:0;width:100%;height:250px;background-color:#fff;border-bottom:1px solid #d6d6d6;}
+#venue-view-top-bar{position:relative;top:0;left:0;width:100%;height:50px;border-bottom:1px solid #d6d6d6;}
+#venue-view-image{float:left;margin:30px 0 0 60px;width:380px;height:180px;background-size:cover;border:2px solid #F9A603;}
+
+.upload-button {position:relative;top:140px;left:340px;overflow:hidden;width:40px;height:40px;text-align:center;cursor:pointer;}
+.upload-button-btn {border:none;color:#FFF;background-color:#F9A603;border-radius:0;
+    font-family:'Amiko', sans-serif;font-size:18px;font-weight:bold;width:40px;height:40px;text-align:center;cursor:pointer;}
+.upload-button-btn:hover {background-color:#FFF;color:#F9A603;}
+.upload-button input[type=file] {font-size: 100px;position: absolute;left: 0;top: 0;opacity: 0;cursor:pointer;}
+
+#venue-view-account-details{float:left;margin:30px 0 0 10px;width:380px;height:180px;}
+.venue-view-tier{position:relative;top:0;left:0;width:100%;height:50px;font-family:'Amiko', sans-serif;font-size:28px;color:#aaa;}
+.venue-view-verified{position:relative;top:0;left:0;width:100%;height:50px;font-family:'Amiko', sans-serif;font-size:12px;}
+.venue-view-vouchers{position:relative;top:0;left:0;width:100%;height:50px;font-family:'Amiko', sans-serif;font-size:18px;color:#aaa;}
+
 #venue-details{position:relative;top:0;left:0;width:100%;height:100%;}
 
-.venue-details-title{position:relative;top:0;left:0;width:100%;height:200px;padding:20px 0 20px 0;background-size:cover;background-repeat:no-repeat;
-    text-align:center;font-family:'Amiko', sans-serif, sans-serif;font-size:18px;color:#FFFFFF;text-shadow: 2px 2px #000000;}
+.venue-details-container{position:relative;top:30px;left:60px;width:500px;background-color:#fff;border:1px solid #DDD;border-radius:3px;}
+#venue-view-edit-header{width:calc(100% - 20px);height:50px;background-color:#F9A603;color:#fff;border-top-left-radius:3px;border-top-right-radius:3px;line-height:50px;padding:0 0 0 20px;font-family:'Amiko', sans-serif;font-size:18px;}
 
-.upload-button {position:relative;top:30px;left:0;overflow:hidden;width:100%;height:40px;text-align:center;}
-.upload-button-btn {border:none;color:#FFF;background-color:#F9A603;padding:8px 20px;border-radius:8px;
-    font-family:'Amiko', sans-serif;font-size:18px;font-weight:bold;}
-.upload-button input[type=file] {font-size: 100px;position: absolute;left: 0;top: 0;opacity: 0;}
-
-.venue-details-container{position:relative;top:0;left:50%;width:90%;height:60%;margin:0 0 0 -45%;}
+#venue-view-details-table{width:90%;margin:20px 0 0 5%;}
+.venue-view-table-label{width:145px;height:40px;padding:0 10px 0 0;font-family:'Amiko', sans-serif;font-size:12px;color:#aaa;font-weight:bold;}
+.venue-view-table-title{width:145px;height:60px;padding:0 10px 0 0;font-family:'Amiko', sans-serif;font-size:12px;color:#000;font-weight:bold;}
 
 .venue-details-submit-button{display:inline-block;width:100%;text-align:center;
 font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;

@@ -1,19 +1,34 @@
-.stats-view{    position: relative;  top: 0;  left: 0;  width: 100%;  height: 100%;}
+/*STATS HEADER*/
+#stats-view-header{position:relative;top:0;left:0;width:100%;height:250px;background-color:#fff;border-bottom:1px solid #d6d6d6;}
+#stats-view-top-bar{position:relative;top:0;left:0;width:100%;height:50px;border-bottom:1px solid #d6d6d6;}
 
-.redeemed-vouchers{position:relative;left:50%;display: inline-block;width: 20%;height:auto;margin: 10px 0 10px 10px;background-color: #ffe5b2;padding: 20px 10px 0 10px;text-align: center;
-font-family: 'Amiko', sans-serif;font-size: 1vw;font-weight: bold;color: #F9A603;border-radius:3px;}
+.stats-view-venue-name{position:relative;top:0;left:0;width:100%;height:50px;font-family:'Amiko', sans-serif;font-size:28px;color:#aaa;padding:50px 0 0 20px;}
+.stats-view-venue-address{position:relative;top:0;left:0;width:100%;height:20px;font-family:'Amiko', sans-serif;font-size:15px;color:#aaa;padding:0 0 0 20px;}
+.stats-view-venue-address a:link{font-family:'Amiko', sans-serif;font-size:15px;color: #f9a603;text-decoration:none;}
+.stats-view-venue-address a:hover{font-family:'Amiko', sans-serif;font-size:15px;color: #f9a603;text-decoration:none;}
+.stats-view-venue-address a:visited{font-family:'Amiko', sans-serif;font-size:15px;color: #f9a603;text-decoration:none;}
 
-.v-count-text{font-size: 10vw;top: 20px;color:#FFF;}
+.stats-view{position:relative;top:0;left:20px;width:100%;height:100%;}
 
-.redeemed-deals{display: inline-block;width: 20%;height:auto;margin: 10px 0 10px 10px;background-color: #ffe5b2;padding: 20px 10px 0 10px;text-align: center;
-font-family:'Amiko', sans-serif;font-size: 1vw;font-weight: bold;color: #F9A603;border-radius:3px;}
+.total-vouchers{position:relative;display: inline-block;width: 200px;height:200px;margin: 10px 0 10px 0px;padding: 20px 0px 0 0px;text-align: center;
+    font-family: 'Amiko', sans-serif;color: #fff;}
+.total-vouchers-circle{border: 8px solid #c5c5c5;width: 130px;height: 130px;border-radius: 100px;text-align: center;}
 
-.d-count-text{font-size: 10vw;top: 20px;color:#FFF;}
+.redeemed-vouchers{position:relative;display: inline-block;width: 200px;height:200px;margin: 10px 0 10px 0px;padding: 20px 0px 0 0px;text-align: center;
+font-family: 'Amiko', sans-serif;color: #f9a603;}
+.redeemed-vouchers-circle{border: 8px solid #c5c5c5;width: 130px;height: 130px;border-radius: 100px;text-align: center;}
+
+.redeemed-deals{position:relative;display: inline-block;width: 200px;height:200px;margin: 10px 0 10px 0px;padding: 20px 0px 0 0px;text-align: center;
+    font-family: 'Amiko', sans-serif;color: darkblue;}
+.redeemed-deals-circle{border: 8px solid #c5c5c5;width: 130px;height: 130px;border-radius: 100px;text-align: center;}
+
+.number{position:relative;top:30px;font-size:30px;}
+.number-title{position:relative;top:30px;font-size:12px;}
 
 .chart-title{font-family:'Amiko', sans-serif;font-size:28px;color:#F9A603;font-weight:bold;text-align:center;
 width:100%;background-color:#ffe5b2;padding:10px 0 10px 0;}
 
-#stats-chart{font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}
+#stats-chart{float:right;width:550px;font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;border: 8px solid #c5c5c5;border-radius: 8px;margin: 40px 40px 0 0;background-color:#fff;}
 
 #invoices-container{position:relative;width:80%;top:0;left:50%;margin:0 0 0 -40%;
     font-family:'Amiko', sans-serif;font-size:18px;color:#F9A603;font-weight:bold;text-align:center;}

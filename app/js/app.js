@@ -9,8 +9,9 @@ $(document).ready(function(){
         var pageID = $(this).attr("id");
 
         var action = $("#action-container");
+		action.html("<div class='loading' ><i class='fas fa-spinner'></i></div>");
+		$("#ui-datepicker-div").remove();
         action.show();
-		$("#master-container").css("opacity", "0.5");
 		setTimeout(function(){
 			switch (pageID){
 				case "add_voucher":
@@ -61,16 +62,6 @@ $(document).ready(function(){
 					break;
 			}
 		}, 1500);
-    });
-
-    $(document).on("click", ".close-action", function(){
-        var action = $("#action-container");
-		action.html("<div class='loading' >LOADING</div>");
-		setTimeout(function(){
-			action.hide();
-			$("#master-container").css("opacity", "1");
-			$("#ui-datepicker-div").remove();
-		}, 1000);
     });
 
     $(document).on("click", ".deal-type", function(){
@@ -133,7 +124,7 @@ $(document).ready(function(){
         if(window.created == 1){
             $("#modal-cover").hide();
             var action = $("#action-container");
-			action.html("<div class='loading' >LOADING</div>");
+			action.html("<div class='loading' ><i class='fas fa-spinner'></i></div>");
 			setTimeout(function(){
 				action.hide("fast");
 				$("#master-container").css("opacity", "1");
@@ -150,7 +141,7 @@ $(document).ready(function(){
 
 		$("#modal-cover").hide();
 		var action = $("#action-container");
-		action.html("<div class='loading' >LOADING</div>");
+		action.html("<div class='loading' ><i class='fas fa-spinner'></i></div>");
 		setTimeout(function(){
 			action.hide("fast");
 			$("#master-container").css("opacity", "1");
@@ -314,7 +305,6 @@ function getVenueDetails(){
 	
 	var action = $("#action-container");
     action.show();
-	$("#master-container").css("opacity", "0.5");
 	$.ajax({
 		url: "http://api.almanacmedia.co.uk/users/venue?userID=" + window.uid,
 		type: "GET",
@@ -333,7 +323,9 @@ function getVenueDetails(){
 			} else {
 				if(json.data.found == 1){
 					var venue = json.data.venues;
-					var venueView = $("#venue-message");
+					var venueImageView = $("#venue-image");
+					var venueNameView = $("#venue-name");
+					var venueStatusView = $("#venue-status");
 
 					window.venueID = venue.id;
 					window.venueName = venue.vName;
@@ -368,21 +360,19 @@ function getVenueDetails(){
 						$("#add_deal").css("opacity", "0.5");
 						$("#active_deal").css("opacity", "0.5");
 						$("#venue_details").css("opacity", "0.5");
-						activeDisplay = "<span style='font-size:14px;' >ACCOUNT INACTIVE/SUSPENDED</span><br />";
+						activeDisplay = "<span style='color:darkred;' ><i class='fas fa-circle' style='padding-right:5px;'></i>Suspended/Inactive</span>";
 					} else {
-						activeDisplay = "<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
-										"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />";
+						activeDisplay = "<span style='color:forestgreen;' ><i class='fas fa-circle' style='padding-right:5px;'></i>Active</span>";
 					}
 
-					venueView.css("background-image", "url(" + window.venueHeader + ")");
-					venueView.html(window.venueName.toUpperCase() + "<br />" + 
-					activeDisplay);
+					venueImageView.css("background-image", "url(" + window.venueHeader + ")");
+					venueNameView.html(window.venueName.toUpperCase());
+					venueStatusView.html(activeDisplay);
 					
 					var action = $("#action-container");
-					action.html("<div class='loading' >LOADING</div>");
+					action.html("<div class='loading' ><i class='fas fa-spinner'></i></div>");
+					getStatsView();
 					setTimeout(function(){
-						action.hide();
-						$("#master-container").css("opacity", "1");
 						window.created = 0;
 						if(window.validated == 0){
 							var modal = $("#modal-cover");
@@ -400,7 +390,7 @@ function getVenueDetails(){
 					}, 1000);
 				} else {
 					console.log(json.data.venues);
-					$("#venue-message").val("NO VENUE SET UP YET!");
+					$("#venue-status").val("NO VENUE SET UP YET!");
 				}
 			}
 		}, error: function(e){
@@ -480,19 +470,8 @@ function createVoucher(){
 					if(json.data.created == 1){
 						modalText.html("YOUR VOUCHER HAS BEEN CREATED!<br /><br />Those with the public app can now redeem your voucher." +
 							"<br /><br />" +
-							"<input type='button' class='close-modal' value='CLOSE' />");
-						if(window.venueVouchersRemaining != 'unlimited'){
-							window.venueVouchersRemaining = window.venueVouchersRemaining - parseInt($("#voucherCount").val());
-							window.venueVouchersUsed = window.venueVouchersUsed + parseInt($("#voucherCount").val());
-						} else {
-							window.venueVouchersUsed = window.venueVouchersUsed + parseInt($("#voucherCount").val());
-						}
-						var venueView = $("#venue-message");							
+							"<input type='button' class='close-modal' value='CLOSE' />");				
 							
-						venueView.html(window.venueName.toUpperCase() + "<br />" + 
-						"<span style='font-size:14px;' >VOUCHERS AND DEALS USED THIS MONTH: " + window.venueVouchersUsed + window.outOf50 + "</span><br />" + 
-						"<span style='font-size:14px;' >VOUCHERS AND DEALS REMAINING: " + window.venueVouchersRemaining + "</span><br /><br />" + 
-						"<input type='button' class='logout-button' value='LOG OUT' />");
 						window.created = 1;
 					} else if(json.data.created == 0){
 						modalText.html(json.data.message + "<br /><br />" + 
