@@ -43,8 +43,24 @@ width:100%;background-color:#ffe5b2;padding:10px 0 10px 0;}
 .invoice-view{display:inline-block;width:100px;height:40px;line-height:40px;color:darkblue;font-size:12px;cursor:pointer;}
 .invoice-view:hover{color:blue;}
 
+@media(max-width:850px){
+    #invoices-container{width:93%;}
+}
+
 @media(max-width:600px){
-    .redeemed-vouchers{font-size:2vw;height:auto;padding:5px;}
-    .redeemed-deals{font-size:2vw;height:auto;padding:5px;}
-    .chart-title{font-size:18px;}
+    .total-vouchers{width: 30%;height:150px;padding:0;margin:10px 0 0 10px;}
+    .total-vouchers-circle{width: 80px;height: 80px;}
+
+    .redeemed-vouchers{width: 30%;height:150px;padding:0;margin:10px 0 0 0;}
+    .redeemed-vouchers-circle{width: 80px;height: 80px;}
+
+    .redeemed-deals{width: 30%;height:150px;padding:0;margin:10px 0 0 0;}
+    .redeemed-deals-circle{width: 80px;height: 80px;}
+
+    .number{position:relative;top:15px;font-size:30px;}
+    .number-title{position:relative;top:6px;font-size:8px;}
+
+    #stats-chart{float:none;width:85%;}
+
+    #invoices-container{width:88%;}
 }

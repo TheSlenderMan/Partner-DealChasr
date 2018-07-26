@@ -101,5 +101,6 @@ if(isset($_GET['app_location']) && $_GET['app_location'] == 1){
 		<div id="action-container" >
 			<div class="loading" ><i class="fas fa-spinner"></i></div>
 		</div>
+        <div id="burger-menu" ><i class="fas fa-ellipsis-v"></i></div>
     </body>
 </html>

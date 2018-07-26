@@ -13,6 +13,14 @@ $(document).ready(function(){
 		$("#ui-datepicker-div").remove();
         action.show();
 		setTimeout(function(){
+
+			if($("#links-container").hasClass("open")){
+				$("#links-container").animate({"left": "-200px"});
+				$("#action-container").animate({"left": "0px"});
+				$("#burger-menu").animate({"left": "20px"});
+				$("#links-container").removeClass("open");
+			}
+
 			switch (pageID){
 				case "add_voucher":
 					if(window.accountActive == 1){
@@ -168,6 +176,21 @@ $(document).ready(function(){
         th.html("RESENDING...");
         resendEmail(th);
     });
+
+	$(document).on("click", "#burger-menu", function(){
+		if($("#links-container").hasClass("open")){
+			$("#links-container").animate({"left": "-200px"});
+			$("#action-container").animate({"left": "0px"});
+			$("#burger-menu").animate({"left": "20px"});
+			$("#links-container").removeClass("open");
+		} else {
+			$("#links-container").animate({"left": "0px"});
+			$("#action-container").animate({"left": "200px"});
+			$("#burger-menu").animate({"left": "220px"});
+			$("#links-container").addClass("open");
+		}
+
+	});
 });
 
 function resendEmail(th){

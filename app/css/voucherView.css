@@ -21,7 +21,7 @@ background-color:#FFF;border-bottom:1px solid #aaa;}
 	
 
 #voucher-view-details-holder{position:relative;top:50px;left:20px;width:600px;background-color:#fff;border:1px solid #DDD;border-radius:3px;}
-#voucher-view-details-header{width:calc(100% - 20px);height:50px;background-color:#F9A603;color:#fff;border-top-left-radius:3px;border-top-right-radius:3px;line-height:50px;padding:0 0 0 20px;font-family:'Amiko', sans-serif;font-size:18px;}
+#voucher-view-details-header{width:calc(100% - 20px);height:50px;background-color:#F9A603;color:#fff;border-top-left-radius:3px;border-top-right-radius:3px;line-height:50px;padding:0 0 0 20px;font-family:'Amiko', sans-serif;font-size:12px;}
 
 #voucher-view-details-table{width:90%;margin:20px 0 0 5%;}
 .voucher-view-table-label{width:145px;height:40px;padding:0 10px 0 0;font-family:'Amiko', sans-serif;font-size:12px;color:#aaa;font-weight:bold;}
@@ -33,6 +33,10 @@ background-color:#FFF;border-bottom:1px solid #aaa;}
 .voucher-submit-button{height:100%;background-color:#FFF;border:none;color:#F9A603;margin:0 0 0 20px;cursor:pointer;}
 
 
-@media (max-width: 800px){
-	#voucher-types .voucher-type{margin:10px 0 0 4.5%;}
+@media (max-width: 850px){
+    #voucher-view-details-holder{width:93%;}
+}
+
+@media (max-width:600px){
+    #voucher-view-details-holder{width:90%;margin:0 0 50px 0;}
 }
