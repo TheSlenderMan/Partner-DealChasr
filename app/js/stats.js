@@ -244,6 +244,8 @@ function getStatsView(){
 			} else {
 				var voucherCount = json.voucherCount;
 				var dealCount    = json.dealCount;
+				var totalVouchers = json.totalVouchers;
+				var totalLive = json.totalLiveVouchers;
 
 				var activeView = $("#action-container");
 
@@ -259,14 +261,29 @@ function getStatsView(){
 
 				statsView += "<div class='stats-view' >";
 
-				statsView += "<div class='total-vouchers' id='' ><div class='total-vouchers-circle' >" +
-					"<div class='number'>" + voucherCount + "</div><div class='number-title'>total live vouchers</div></div></div>";
+				statsView += "<div class='stats-view-numbers' >";
 
-				statsView += "<div class='redeemed-vouchers' id='' ><div class='redeemed-vouchers-circle' >" +
-					"<div class='number'>" + voucherCount + "</div><div class='number-title'>total redemptions</div></div></div>";
+				statsView += "<div class='total-vouchers' id='' >" +
+					"<div class='total-vouchers-bar' ><i class='fas fa-database'></i></div>" +
+					"<div class='total-vouchers-text' ><span style='font-size:14px;color:#F9a603;' >TOTAL VOUCHERS</span><div style='font-size:14px;' >" + totalVouchers + "</div></div>" +
+					"</div>";
 
-				statsView += "<div class='redeemed-deals' id='' ><div class='redeemed-deals-circle' >" +
-					"<div class='number'>" + dealCount + "</div><div class='number-title'>total interests</div></div></div>";
+				statsView += "<div class='total-live-vouchers' id='' >" +
+					"<div class='total-live-vouchers-bar' ><i class='fas fa-heart'></i></div>" +
+					"<div class='total-live-vouchers-text' ><span style='font-size:14px;color:#6de23b;' >TOTAL LIVE VOUCHERS</span><div style='font-size:14px;' >" + totalLive + "</div></div>" +
+					"</div>";
+
+				statsView += "<div class='redeemed-vouchers' id='' >" +
+					"<div class='redeemed-vouchers-bar' ><i class='fas fa-pound-sign'></i></div>" +
+					"<div class='redeemed-vouchers-text' ><span style='font-size:14px;color:#e5576e;' >VOUCHERS REDEEMED</span><div style='font-size:14px;' >this month: " + voucherCount + "</div></div>" +
+					"</div>";
+
+				statsView += "<div class='redeemed-deals' id='' >" +
+					"<div class='redeemed-deals-bar' ><i class='fas fa-glass-martini'></i></div>" +
+					"<div class='redeemed-deals-text' ><span style='font-size:14px;color:#579ee5;' >DEALS LIKED</span><div style='font-size:14px;' >" + dealCount + "</div></div>" +
+					"</div>";
+
+				statsView += "</div>";
 
 				statsView += "<div id='stats-chart' style='height: 250px;'></div>";
 

@@ -12,7 +12,7 @@ text-align:center;font-family:'Amiko', sans-serif;font-size:18px;color:#FFFFFF;t
 font-family:'Amiko', sans-serif;font-size:12px;color:#F9A603;font-weight:bold;height:100%;line-height:40px;
 cursor:pointer;margin: 0 0 0 3.5%;background-color:#FFF;border-bottom:1px solid #aaa;}
 
-#voucher-types{position:relative;top:30px;left:20px;width:calc(100% - 40px);background-color:#fff;border:1px solid #DDD;border-radius:3px;}
+#voucher-types{position:relative;top:30px;left:20px;width:calc(100% - 40px);background-color:#fff;border:1px solid #DDD;border-radius:3px;margin-bottom:70px;}
 #voucher-view-create-header{width:calc(100% - 20px);height:50px;background-color:#F9A603;color:#fff;border-top-left-radius:3px;border-top-right-radius:3px;line-height:50px;padding:0 0 0 20px;font-family:'Amiko', sans-serif;font-size:12px;}
 
 #voucher-types .voucher-type{display:inline-block;width:calc(100% / 4);text-align:center;font-family:'Amiko', sans-serif;

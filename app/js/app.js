@@ -16,9 +16,9 @@ $(document).ready(function(){
 
 			if($("#links-container").hasClass("open")){
 				$("#links-container").animate({"left": "-200px"});
-				$("#action-container").animate({"left": "0px"});
-				$("#burger-menu").animate({"left": "20px"});
+				$("#action-container").animate({"opacity": "1"});
 				$("#links-container").removeClass("open");
+				$("#burger-menu").animate({"color":"#aaa"});
 			}
 
 			switch (pageID){
@@ -180,13 +180,13 @@ $(document).ready(function(){
 	$(document).on("click", "#burger-menu", function(){
 		if($("#links-container").hasClass("open")){
 			$("#links-container").animate({"left": "-200px"});
-			$("#action-container").animate({"left": "0px"});
-			$("#burger-menu").animate({"left": "20px"});
+			$("#action-container").animate({"opacity": "1"});
+			$("#burger-menu").animate({"color":"#aaa"});
 			$("#links-container").removeClass("open");
 		} else {
 			$("#links-container").animate({"left": "0px"});
-			$("#action-container").animate({"left": "200px"});
-			$("#burger-menu").animate({"left": "220px"});
+			$("#action-container").animate({"opacity": "0.5"});
+			$("#burger-menu").animate({"color":"#fff"});
 			$("#links-container").addClass("open");
 		}
 
